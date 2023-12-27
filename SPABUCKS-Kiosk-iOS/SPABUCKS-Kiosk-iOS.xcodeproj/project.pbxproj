@@ -18,6 +18,7 @@
 		37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112362B3ABBE2003740CF /* HeaderView.swift */; };
 		37E112392B3ABD99003740CF /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112382B3ABD99003740CF /* MenuView.swift */; };
 		37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1123A2B3ABDB9003740CF /* OrderListView.swift */; };
+		C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		37E112362B3ABBE2003740CF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		37E112382B3ABD99003740CF /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		37E1123A2B3ABDB9003740CF /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
+		C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpabucksMenuItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			children = (
 				37E1122F2B3ABA2F003740CF /* Extensions */,
 				37E1122E2B3AB9E3003740CF /* Components */,
+				C8095C942B3C12B500009E46 /* Model */,
 				37E1122C2B3AB957003740CF /* Supports */,
 			);
 			path = Global;
@@ -136,6 +139,14 @@
 				37E1121B2B3AB8FC003740CF /* ViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C8095C942B3C12B500009E46 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +226,7 @@
 				37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */,
 				37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */,
 				37E112332B3ABB3A003740CF /* ColorButton.swift in Sources */,
+				C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */,
 				37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */,
 				37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */,
 			);
