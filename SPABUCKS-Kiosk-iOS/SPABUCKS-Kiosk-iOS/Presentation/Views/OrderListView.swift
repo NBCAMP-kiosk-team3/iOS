@@ -25,7 +25,6 @@ extension OrderListView {
         backgroundColor = .systemGray6
         heightAnchor.constraint(equalToConstant: 317 + 45).isActive = true
         
-        // create vertical Stack View
         let verticalStackView = UIStackView()
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .fill
@@ -36,8 +35,7 @@ extension OrderListView {
         verticalStackView.addArrangedSubview(createPaymentBtn())
         
         self.addSubview(verticalStackView)
-        
-        // setting autoLayout
+
         verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             verticalStackView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -49,9 +47,9 @@ extension OrderListView {
     
     private func createOrderPriceInfo() -> UIStackView {
         let stackView = UIStackView()
-        stackView.axis = .horizontal // 왼 -> 오 수평배치
-        stackView.distribution = .fillEqually // 서브뷰의 공간을 동일하게 분배
-        stackView.spacing = 0 // 각 뷰 사이의 간격
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 0
         stackView.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
         let countLabel = UILabel()
@@ -75,9 +73,9 @@ extension OrderListView {
     private func createPaymentBtn() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .trailing // 우측 정렬
-        stackView.distribution = .fillEqually // 서브뷰의 공간을 동일하게 분배
-        stackView.spacing = 15 // 각 뷰 사이의 간격
+        stackView.alignment = .trailing
+        stackView.distribution = .fillEqually
+        stackView.spacing = 15
         stackView.heightAnchor.constraint(equalToConstant: 65).isActive = true
         
         let cancelBtn: ColorButton = {
