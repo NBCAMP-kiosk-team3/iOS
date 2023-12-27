@@ -53,10 +53,7 @@ extension MenuView: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 extension MenuView: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
+    // 컬랙션 뷰의 아이템이 몇개인지 -> Items 프로퍼티 갯수에 따라 변경
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -70,48 +67,71 @@ extension MenuView: UICollectionViewDataSource {
         }
     }
     
+    // 컬랙션뷰 하나의 단위가 Cell, 어떤 모양의 cell인지
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellId", for: indexPath) as! MenuCell
-        cell.backgroundColor = .blue
-        
-        var item: SpabucksMenuItem
-        
-        if indexPath.section == 0 {
-            item = drinkItems[indexPath.item]
-        } else if indexPath.section == 1 {
-            item = foodItems[indexPath.item]
-        } else {
-            item = merchandiserItems[indexPath.item]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellId", for: indexPath) as? MenuCell else {
+            return UICollectionViewCell()
         }
-        
-        cell.imageView.image = UIImage(named: item.imageName)
-        cell.nameLabel.text = item.name
-        
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension MenuView: UICollectionViewDelegateFlowLayout {
+    
+    // 컬랙션뷰의 셀의 크기를 반환하는 매서드
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 110, height: 110)
+        return CGSize(width: 180, height: 70)
     }
+    
+    // 지정된 섹션의 여백을 반환하는 매서드
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
+        
+    }
+
+    // 지정된 섹션의 위 아래 간격을 지정하는 매서드, scrollDirection이 horizontal이면 수직이 행이 되고 vertical이면 수평이 행이 된다.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
+        
+    }
+
+    // 지정된 섹션의 좌우 간격을 지정하는 매서드
+    // 지정된 섹션의 각 행과열에 scroll이 vertical일경우, 같은 행에 있는 item들의 간격을 지정하고, scroll이 horizontal 일경우, 같은 열에 있는 item들의 간격을 지정한다.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 14
+    }
+
+    // /지정된 섹션의 헤더뷰의 크기를 반환하는 메서드. 크기를 지정하지 않으면 화면에 보이지 않는다.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: 400, height: 20)
+        
+        
+    }
+
+    // 지정된 섹션의 푸터뷰의 크기를 반환하는 매서드, 크기를 지정하지 않으면 화면에 보이지 않는다.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: 400, height: 20)
+    }
+    
 }
 
 
 extension MenuView {
     private func setUI() {
-        backgroundColor = .systemBlue
+        //MenuView의 높이 지정(고정값, equalToConstant) : 455
         heightAnchor.constraint(equalToConstant: 455).isActive = true
 
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        collectionView.dataSource = self // UICollectionViewDataSource 프로토콜 준수
+        collectionView.delegate = self // UICollectionViewDataSource 프로토콜 준수
+        //collectionView에 사용할 셀 클래스 등록 MenuCell을 클래스로 사용, 식별자로 MenuCell.cellId 사용
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.cellId)
-        collectionView.backgroundColor = .white
-        addSubview(collectionView)
+        collectionView.backgroundColor = .blue //collectionView 배경색 :
+        addSubview(collectionView) // collectionView를 MenuView에 추가
 
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
+        collectionView.translatesAutoresizingMaskIntoConstraints = false //오토레이아웃을 사용하지 않도록 설정
+        NSLayoutConstraint.activate([ // 오토레이아웃 제약조건을 MenuView의 모든 가장자리에 설정
+            //topAnchor(위), bottomAnchor(아래), leadingAnchor(왼쪽에서 시작), trailingAnchor(오른쪽에서 시작)
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -122,43 +142,50 @@ extension MenuView {
 
 //MARK: - imageView, nameLabel 셀 설정 서브 클래스
 private class MenuCell: UICollectionViewCell {
+    //UIImageView에 position ambiguous for UIImageView -> UIImageView UIImageView 에 위치가 애매합니다
     
+    //셀의 재사용을 위해 사용될 식별자
     static let cellId = "CellId"
     
+    //UIImageView, UILabel 객체화
     let imageView = UIImageView()
     let nameLabel = UILabel()
     
+    // 초기화
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
+        cellViews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
+    private func cellViews() {
         // imageView 설정
-        backgroundColor = .green
-        imageView.contentMode = .scaleToFill
-        addSubview(imageView) //stack view에서는 따로 논다. 
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .yellow
+        imageView.contentMode = .scaleAspectFit
+        addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false //오토레이아웃 비동기화
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 50) // 이미지 높이에 맞게 조절
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10), // 위 여백
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10), // 왼쪽 여백
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10), // 오른쪽 여백
+            imageView.widthAnchor.constraint(equalToConstant: 50), //이미지 넓이
+            imageView.heightAnchor.constraint(equalToConstant: 50) //이미지 높이
         ])
-        
+            
         // nameLabel 설정
         nameLabel.textAlignment = .center
         addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+        nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+        nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+        nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
+
 }
+
