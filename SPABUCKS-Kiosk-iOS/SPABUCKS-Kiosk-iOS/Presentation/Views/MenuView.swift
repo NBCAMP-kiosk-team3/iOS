@@ -28,6 +28,6 @@ class MenuView: UIView {
 extension MenuView {
     private func setUI() {
         backgroundColor = .systemBlue
-        heightAnchor.constraint(equalToConstant: 505).isActive = true
+        heightAnchor.constraint(equalToConstant: 455).isActive = true
     }
 }

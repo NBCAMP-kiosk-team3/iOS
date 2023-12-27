@@ -29,6 +29,6 @@ extension HeaderView {
     private func setUI() {
         backgroundColor = .systemRed
         
-        heightAnchor.constraint(equalToConstant: 65).isActive = true
+        heightAnchor.constraint(equalToConstant: 65 + 50).isActive = true
     }
 }
