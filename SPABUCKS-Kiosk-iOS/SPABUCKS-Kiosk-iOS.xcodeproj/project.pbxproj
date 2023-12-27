@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112172B3AB8FC003740CF /* AppDelegate.swift */; };
+		37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112192B3AB8FC003740CF /* SceneDelegate.swift */; };
+		37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1121B2B3AB8FC003740CF /* ViewController.swift */; };
+		37E1121F2B3AB8FC003740CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E1121D2B3AB8FC003740CF /* Main.storyboard */; };
+		37E112212B3AB8FE003740CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37E112202B3AB8FE003740CF /* Assets.xcassets */; };
+		37E112242B3AB8FE003740CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37E112222B3AB8FE003740CF /* LaunchScreen.storyboard */; };
+		37E112312B3ABA46003740CF /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112302B3ABA46003740CF /* UIViewController+Extension.swift */; };
+		37E112332B3ABB3A003740CF /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112322B3ABB3A003740CF /* ColorButton.swift */; };
+		37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112362B3ABBE2003740CF /* HeaderView.swift */; };
+		37E112392B3ABD99003740CF /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112382B3ABD99003740CF /* MenuView.swift */; };
+		37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1123A2B3ABDB9003740CF /* OrderListView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		37E112142B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPABUCKS-Kiosk-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		37E112172B3AB8FC003740CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		37E112192B3AB8FC003740CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		37E1121B2B3AB8FC003740CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		37E1121E2B3AB8FC003740CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		37E112202B3AB8FE003740CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		37E112232B3AB8FE003740CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		37E112252B3AB8FE003740CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37E112302B3ABA46003740CF /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		37E112322B3ABB3A003740CF /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
+		37E112362B3ABBE2003740CF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		37E112382B3ABD99003740CF /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		37E1123A2B3ABDB9003740CF /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37E112112B3AB8FC003740CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37E1120B2B3AB8FC003740CF = {
+			isa = PBXGroup;
+			children = (
+				37E112162B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS */,
+				37E112152B3AB8FC003740CF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		37E112152B3AB8FC003740CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37E112142B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37E112162B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				37E1122B2B3AB950003740CF /* Global */,
+				37E1122D2B3AB967003740CF /* Presentation */,
+				37E112252B3AB8FE003740CF /* Info.plist */,
+			);
+			path = "SPABUCKS-Kiosk-iOS";
+			sourceTree = "<group>";
+		};
+		37E1122B2B3AB950003740CF /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				37E1122F2B3ABA2F003740CF /* Extensions */,
+				37E1122E2B3AB9E3003740CF /* Components */,
+				37E1122C2B3AB957003740CF /* Supports */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		37E1122C2B3AB957003740CF /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				37E112172B3AB8FC003740CF /* AppDelegate.swift */,
+				37E112192B3AB8FC003740CF /* SceneDelegate.swift */,
+				37E1121D2B3AB8FC003740CF /* Main.storyboard */,
+				37E112202B3AB8FE003740CF /* Assets.xcassets */,
+				37E112222B3AB8FE003740CF /* LaunchScreen.storyboard */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		37E1122D2B3AB967003740CF /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				37E112342B3ABBB9003740CF /* Views */,
+				37E112352B3ABBCE003740CF /* ViewController */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		37E1122E2B3AB9E3003740CF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				37E112322B3ABB3A003740CF /* ColorButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		37E1122F2B3ABA2F003740CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				37E112302B3ABA46003740CF /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		37E112342B3ABBB9003740CF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				37E112362B3ABBE2003740CF /* HeaderView.swift */,
+				37E112382B3ABD99003740CF /* MenuView.swift */,
+				37E1123A2B3ABDB9003740CF /* OrderListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		37E112352B3ABBCE003740CF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				37E1121B2B3AB8FC003740CF /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		37E112132B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37E112282B3AB8FE003740CF /* Build configuration list for PBXNativeTarget "SPABUCKS-Kiosk-iOS" */;
+			buildPhases = (
+				37E112102B3AB8FC003740CF /* Sources */,
+				37E112112B3AB8FC003740CF /* Frameworks */,
+				37E112122B3AB8FC003740CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SPABUCKS-Kiosk-iOS";
+			productName = "SPABUCKS-Kiosk-iOS";
+			productReference = 37E112142B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37E1120C2B3AB8FC003740CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					37E112132B3AB8FC003740CF = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = 37E1120F2B3AB8FC003740CF /* Build configuration list for PBXProject "SPABUCKS-Kiosk-iOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 37E1120B2B3AB8FC003740CF;
+			productRefGroup = 37E112152B3AB8FC003740CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37E112132B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		37E112122B3AB8FC003740CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37E112242B3AB8FE003740CF /* LaunchScreen.storyboard in Resources */,
+				37E112212B3AB8FE003740CF /* Assets.xcassets in Resources */,
+				37E1121F2B3AB8FC003740CF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37E112102B3AB8FC003740CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37E112392B3ABD99003740CF /* MenuView.swift in Sources */,
+				37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */,
+				37E112312B3ABA46003740CF /* UIViewController+Extension.swift in Sources */,
+				37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */,
+				37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */,
+				37E112332B3ABB3A003740CF /* ColorButton.swift in Sources */,
+				37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */,
+				37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		37E1121D2B3AB8FC003740CF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37E1121E2B3AB8FC003740CF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		37E112222B3AB8FE003740CF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37E112232B3AB8FE003740CF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		37E112262B3AB8FE003740CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		37E112272B3AB8FE003740CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		37E112292B3AB8FE003740CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MLDS498G8D;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SPABUCKS-Kiosk-iOS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.JunniJunni.SPABUCKS-Kiosk-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		37E1122A2B3AB8FE003740CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MLDS498G8D;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SPABUCKS-Kiosk-iOS/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.JunniJunni.SPABUCKS-Kiosk-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		37E1120F2B3AB8FC003740CF /* Build configuration list for PBXProject "SPABUCKS-Kiosk-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37E112262B3AB8FE003740CF /* Debug */,
+				37E112272B3AB8FE003740CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37E112282B3AB8FE003740CF /* Build configuration list for PBXNativeTarget "SPABUCKS-Kiosk-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37E112292B3AB8FE003740CF /* Debug */,
+				37E1122A2B3AB8FE003740CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 37E1120C2B3AB8FC003740CF /* Project object */;
+}
