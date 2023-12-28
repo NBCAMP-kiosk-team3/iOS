@@ -9,6 +9,56 @@ import UIKit
 
 class OrderListView: UIView {
     
+    // MARK: - UI Properties
+    
+    let countLabel: UILabel = {
+        let label = UILabel()
+        label.text = "4개"
+        
+        return label
+    }()
+    
+    let priceTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "총 주문 가격"
+        label.textAlignment = .right
+        
+        return label
+    }()
+    
+    let priceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "20,000원"
+        label.font = UIFont.boldSystemFont(ofSize: 20).withSize(20.0)
+        label.textColor = .systemRed
+        label.textAlignment = .right
+        
+        return label
+    }()
+    
+    let cancelBtn: ColorButton = {
+        let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
+        button.setTitleColor(.black, for: .normal)
+        
+        return button
+    }()
+    
+    let paymentBtn: ColorButton = {
+        let button = ColorButton(title: "결제하기", color: UIColor.red)
+        
+        return button
+    }()
+    
+    let callEmployeeBtn: ColorButton = {
+        let margin = 10.0
+        let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
+        button.setTitleColor(.black, for: .normal)
+        
+        return button
+    }()
+    
+    // MARK: - Life Cycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -20,6 +70,8 @@ class OrderListView: UIView {
     }
 }
 
+// MARK: - Extensions
+
 extension OrderListView {
     private func setUI() {
         backgroundColor = .systemGray6
@@ -30,9 +82,9 @@ extension OrderListView {
         verticalStackView.distribution = .fill
         verticalStackView.spacing = 0
         
-        verticalStackView.addArrangedSubview(createOrderPriceInfo())
-        verticalStackView.addArrangedSubview(createTableView())
-        verticalStackView.addArrangedSubview(createPaymentBtn())
+        [createOrderPriceInfo(), createTableView(), createPaymentBtn()].forEach {
+            verticalStackView.addArrangedSubview($0)
+        }
         
         self.addSubview(verticalStackView)
         
@@ -52,22 +104,9 @@ extension OrderListView {
         stackView.spacing = 0
         stackView.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
-        let countLabel = UILabel()
-        countLabel.text = "4개"
-        
-        let priceTitleLabel = UILabel()
-        priceTitleLabel.text = "총 주문 가격"
-        priceTitleLabel.textAlignment = .right
-        
-        let priceLabel = UILabel()
-        priceLabel.text = "20,000원"
-        priceLabel.font = UIFont.boldSystemFont(ofSize: 20).withSize(20.0)
-        priceLabel.textColor = .systemRed
-        priceLabel.textAlignment = .right
-        
-        stackView.addArrangedSubview(countLabel)
-        stackView.addArrangedSubview(priceTitleLabel)
-        stackView.addArrangedSubview(priceLabel)
+        [countLabel, priceTitleLabel, priceLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
         
         return stackView
     }
@@ -80,33 +119,13 @@ extension OrderListView {
         stackView.spacing = 15
         stackView.heightAnchor.constraint(equalToConstant: 65).isActive = true
         
-        let cancelBtn: ColorButton = {
-            let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
-            button.setTitleColor(.black, for: .normal)
-            button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-            
-            return button
-        }()
+        cancelBtn.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        paymentBtn.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
+        callEmployeeBtn.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
         
-        let paymentBtn: ColorButton = {
-            let button = ColorButton(title: "결제하기", color: UIColor.red)
-            button.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
-            
-            return button
-        }()
-        
-        let callEmployeeBtn: ColorButton = {
-            let margin = 10.0
-            let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
-            button.setTitleColor(.black, for: .normal)
-            button.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
-            
-            return button
-        }()
-        
-        stackView.addArrangedSubview(callEmployeeBtn)
-        stackView.addArrangedSubview(cancelBtn)
-        stackView.addArrangedSubview(paymentBtn)
+        [cancelBtn, paymentBtn, callEmployeeBtn].forEach {
+            stackView.addArrangedSubview($0)
+        }
         
         return stackView
     }
@@ -117,6 +136,10 @@ extension OrderListView {
 
     @objc private func paymentButtonTapped() {
         print("결제 버튼이 클릭되었습니다.")
+    }
+    
+    @objc private func callEmployeeTapped() {
+        print("직원호출 버튼이 클릭되었습니다.")
     }
     
     private func createTableView() -> UITableView {
@@ -134,7 +157,7 @@ extension OrderListView {
 extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
