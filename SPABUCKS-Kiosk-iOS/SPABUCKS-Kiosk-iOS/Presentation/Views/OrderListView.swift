@@ -147,9 +147,7 @@ extension OrderListView {
         
         return tableView
     }
-}
-
-extension OrderListView {
+    
     @objc private func cancelButtonTapped() {
         print("취소 버튼이 클릭되었습니다.")
     }
