@@ -63,7 +63,14 @@ extension HeaderView {
     private func makeCategory() -> UIStackView {
         self.backgroundColor = .systemGray6
         
-        
+        let beverageMenuButton: UIButton = {
+            let button = UIButton()
+            button.backgroundColor = .white
+            button.setTitle("음료", for: .normal)
+            button.setTitleColor(.black, for: .normal)
+            button.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
+            return button
+        }()
         
         let foodMenuButton: UIButton = {
             let button = UIButton()
@@ -106,8 +113,9 @@ extension HeaderView {
         return stackView
     }
     
-    //tapBeverageButton에서 버튼에 접근
-
+    @objc private func tapBeverageButton() {
+        print("음료 메뉴가 선택되었습니다.")
+    }
     
     @objc private func tapFoodButton() {
         print("푸드 메뉴가 선택되었습니다.")
