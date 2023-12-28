@@ -119,11 +119,18 @@ extension OrderListView {
         stackView.spacing = 15
         stackView.heightAnchor.constraint(equalToConstant: 65).isActive = true
         
-        cancelBtn.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        paymentBtn.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
-        callEmployeeBtn.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
+        let cancelButton: ColorButton = {
+            let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
+            button.setTitleColor(.black, for: .normal)
+            
+            return button
+        }()
         
-        [cancelBtn, paymentBtn, callEmployeeBtn].forEach {
+        cancelButton.addTarget(cancelButton, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        paymentButton.addTarget(paymentButton, action: #selector(paymentButtonTapped), for: .touchUpInside)
+        callEmployeeButton.addTarget(callEmployeeButton, action: #selector(paymentButtonTapped), for: .touchUpInside)
+        
+        [cancelButton, paymentButton, callEmployeeButton].forEach {
             stackView.addArrangedSubview($0)
         }
         
