@@ -11,6 +11,7 @@ import UIKit
 class MenuView: UIView {
 
 //MARK: - 메뉴 프로퍼티 정의
+    var dataSource: [SpabucksMenuItem] = []
     var drinkItems: [SpabucksMenuItem] = [
         SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano"),
         SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato"),
@@ -43,6 +44,15 @@ class MenuView: UIView {
     }
 }
 
+extension MenuView {
+    func showBeverageView() {
+        // 음료버튼을 탭했을 때 호출 -> 메뉴에 음료를 보여주는 것을 구현
+        dataSource = drinkItems
+        collectionView.reloadData()
+    }
+}
+
+
 // MARK: - UICollectionViewDelegate
 extension MenuView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -55,23 +65,20 @@ extension MenuView: UICollectionViewDelegate {
 extension MenuView: UICollectionViewDataSource {
     // 컬랙션 뷰의 아이템이 몇개인지 -> Items 프로퍼티 갯수에 따라 변경
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return drinkItems.count
-        case 1:
-            return foodItems.count
-        case 2:
-            return merchandiserItems.count
-        default:
-            return 0
-        }
+        return dataSource.count
     }
     
     // 컬랙션뷰 하나의 단위가 Cell, 어떤 모양의 cell인지
+    // UIKit이 아래 매소드를 호출
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellId", for: indexPath) as? MenuCell else {
             return UICollectionViewCell()
         }
+        //
+        cell.imageView.image = UIImage(named: dataSource[indexPath.row].imageName)
+        cell.nameLabel.text = dataSource[indexPath.row].name
+        print(indexPath)
+        print(dataSource[indexPath.row])
         return cell
     }
 }
@@ -140,9 +147,10 @@ extension MenuView {
     }
 }
 
-//MARK: - imageView, nameLabel 셀 설정 서브 클래스
-private class MenuCell: UICollectionViewCell {
-    //UIImageView에 position ambiguous for UIImageView -> UIImageView UIImageView 에 위치가 애매합니다
+// MARK: - imageView, nameLabel 셀 설정 서브 클래스
+
+class MenuCell: UICollectionViewCell {
+    //UIImageView에 position ambiguous for UIImageView -> UIImageView UIImageView 에 위치가 애매합니다. (질문) 셀 안에 UIImageView와 UILabel 넣기
     
     //셀의 재사용을 위해 사용될 식별자
     static let cellId = "CellId"
@@ -165,25 +173,25 @@ private class MenuCell: UICollectionViewCell {
         // imageView 설정
         backgroundColor = .yellow
         imageView.contentMode = .scaleAspectFit
-        addSubview(imageView)
+        contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false //오토레이아웃 비동기화
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10), // 위 여백
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10), // 왼쪽 여백
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10), // 오른쪽 여백
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             imageView.widthAnchor.constraint(equalToConstant: 50), //이미지 넓이
             imageView.heightAnchor.constraint(equalToConstant: 50) //이미지 높이
         ])
             
         // nameLabel 설정
         nameLabel.textAlignment = .center
-        addSubview(nameLabel)
+        contentView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
-        nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-        nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-        nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+        nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 3),
+        nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+        nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 5)
         ])
     }
 
