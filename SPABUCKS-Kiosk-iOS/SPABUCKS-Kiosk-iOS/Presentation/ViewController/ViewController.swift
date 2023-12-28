@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        headerView.beverageMenuButton.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
         setUI()
         setLayout()
     }
@@ -32,6 +32,14 @@ class ViewController: UIViewController {
 // MARK: - Extensions
 
 extension ViewController {
+    @objc private func tapBeverageButton() {
+        print("음료 메뉴가 선택되었습니다.")
+        // vc. 매서드 호출 -> delegate로 구현 delegate.매서드 / protocol로 delegate를 구현
+        // 헤더뷰가 아닌 delegate(위임자)가 대신 실행
+        // 탭 했을 때, 메뉴뷰에게 음료를 보여줘
+        menuView.showBeverageView()
+        
+    }
     
     private func setUI() {
         view.backgroundColor = .white
