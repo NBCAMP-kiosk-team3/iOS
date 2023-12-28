@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B4089EC2B3D6D6600796E95 /* SpabucksOrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4089EB2B3D6D6600796E95 /* SpabucksOrderItem.swift */; };
+		1B4089EE2B3D6DBE00796E95 /* OrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4089ED2B3D6DBE00796E95 /* OrderListTableViewCell.swift */; };
 		37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112172B3AB8FC003740CF /* AppDelegate.swift */; };
 		37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112192B3AB8FC003740CF /* SceneDelegate.swift */; };
 		37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1121B2B3AB8FC003740CF /* ViewController.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B4089EB2B3D6D6600796E95 /* SpabucksOrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpabucksOrderItem.swift; sourceTree = "<group>"; };
+		1B4089ED2B3D6DBE00796E95 /* OrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListTableViewCell.swift; sourceTree = "<group>"; };
 		37E112142B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPABUCKS-Kiosk-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E112172B3AB8FC003740CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37E112192B3AB8FC003740CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +55,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B4089E92B3D6D2600796E95 /* OrderList */ = {
+			isa = PBXGroup;
+			children = (
+				37E1123A2B3ABDB9003740CF /* OrderListView.swift */,
+				1B4089ED2B3D6DBE00796E95 /* OrderListTableViewCell.swift */,
+				1B4089EA2B3D6D3200796E95 /* Model */,
+			);
+			path = OrderList;
+			sourceTree = "<group>";
+		};
+		1B4089EA2B3D6D3200796E95 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B4089EB2B3D6D6600796E95 /* SpabucksOrderItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		37E1120B2B3AB8FC003740CF = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +151,7 @@
 			children = (
 				37E112362B3ABBE2003740CF /* HeaderView.swift */,
 				C811ACE52B3D5EB000E065AC /* MenuVIew */,
-				37E1123A2B3ABDB9003740CF /* OrderListView.swift */,
-				1BD6AABB2B3D479100941ED9 /* OrderListTableViewCell.swift */,
+				1B4089E92B3D6D2600796E95 /* OrderList */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -238,9 +259,11 @@
 				37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */,
 				37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */,
 				37E112332B3ABB3A003740CF /* ColorButton.swift in Sources */,
+				1B4089EE2B3D6DBE00796E95 /* OrderListTableViewCell.swift in Sources */,
 				C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */,
 				37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */,
 				37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */,
+				1B4089EC2B3D6D6600796E95 /* SpabucksOrderItem.swift in Sources */,
 				C811ACE42B3D461700E065AC /* Eatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

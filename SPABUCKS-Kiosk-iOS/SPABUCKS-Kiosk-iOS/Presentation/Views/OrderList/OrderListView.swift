@@ -12,8 +12,8 @@ class OrderListView: UIView {
     // MARK: - Properties
     
     var tempOrderList: [SpabucksOrderItem] = [
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano")),
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato"), orderCount: 3)
+        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano", price: 5.7)),
+        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato", price: 5.9), orderCount: 3)
     ]
     
     // MARK: - UI Properties
@@ -142,7 +142,7 @@ extension OrderListView {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.cellID)
+        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
         tableView.rowHeight = 100.0
         
         return tableView
@@ -168,7 +168,7 @@ extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.cellID, for: indexPath) as! OrderListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         cell.selectionStyle = .none
         
         cell.itemImageView.image = UIImage(named: tempOrderList[indexPath.row].menuItem.imageName)
