@@ -12,8 +12,8 @@ class OrderListView: UIView {
     // MARK: - Properties
     
     var tempOrderList: [SpabucksOrderItem] = [
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano")),
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato"), orderCount: 3)
+        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano", price: 5.7)),
+        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato", price: 5.9), orderCount: 3)
     ]
     
     // MARK: - UI Properties
