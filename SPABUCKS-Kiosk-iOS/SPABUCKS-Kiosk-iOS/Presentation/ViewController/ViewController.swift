@@ -38,6 +38,14 @@ extension ViewController {
         menuView.showBeverageView()
     }
     
+    @objc private func tapFoodButton() {
+        print("푸드 메뉴가 선택되었습니다.")
+    }
+    
+    @objc private func tapMDButton() {
+        print("상품 메뉴가 선택되었습니다.")
+    }
+    
     private func setUI() {
         view.backgroundColor = .white
         

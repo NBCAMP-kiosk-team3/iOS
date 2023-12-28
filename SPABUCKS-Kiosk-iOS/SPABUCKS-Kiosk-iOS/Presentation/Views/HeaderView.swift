@@ -5,11 +5,6 @@
 //  Created by Joon Baek on 2023/12/26.
 //
 
-/**
- 상단카테고리 - 유리님
- (주석은 확인 후 지워주세요!)
-  **/
-
 import UIKit
 
 class HeaderView: UIView {
@@ -75,7 +70,6 @@ extension HeaderView {
             let stackView = UIStackView()
             stackView.axis = .vertical
             stackView.distribution = .fillEqually
-//            stackView.addArrangedSubview(makeCategory())
             return stackView
         }()
         
