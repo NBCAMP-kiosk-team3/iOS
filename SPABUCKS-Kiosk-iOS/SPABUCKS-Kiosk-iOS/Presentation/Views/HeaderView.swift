@@ -19,8 +19,7 @@ class HeaderView: UIView {
         button.backgroundColor = .white
         button.setTitle("음료", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        // 1.self 대신 viewcontroller로 타겟을 설정 -> vc에서 헤더뷰에 접근해서 addTarget을
-        // 2.
+        // 1.self 대신 viewcontroller로 타겟을 설정 -> vc에서 헤더뷰에 접근해서 addTarget을 설정
         return button
     }()
     
@@ -63,14 +62,7 @@ extension HeaderView {
     private func makeCategory() -> UIStackView {
         self.backgroundColor = .systemGray6
         
-        let beverageMenuButton: UIButton = {
-            let button = UIButton()
-            button.backgroundColor = .white
-            button.setTitle("음료", for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
-            return button
-        }()
+        
         
         let foodMenuButton: UIButton = {
             let button = UIButton()
@@ -113,9 +105,8 @@ extension HeaderView {
         return stackView
     }
     
-    @objc private func tapBeverageButton() {
-        print("음료 메뉴가 선택되었습니다.")
-    }
+    //tapBeverageButton에서 버튼에 접근
+
     
     @objc private func tapFoodButton() {
         print("푸드 메뉴가 선택되었습니다.")
