@@ -4,9 +4,7 @@
 //
 //  Created by Joon Baek on 2023/12/26.
 //
-import Foundation
 import UIKit
-
 
 class MenuView: UIView {
 
@@ -83,7 +81,7 @@ extension MenuView: UICollectionViewDataSource {
     // 컬랙션뷰 하나의 단위가 cell이라고 한다. 어떤 모양의 cell인지
     // UIKit이 아래 매소드(collectionView ~ cellForItemAt)를 호출
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellId", for: indexPath) as? MenuCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as? MenuCell else {
             return UICollectionViewCell()
         }
         //
@@ -167,7 +165,7 @@ class MenuCell: UICollectionViewCell {
     //UIImageView에 position ambiguous for UIImageView -> UIImageView UIImageView 에 위치가 애매합니다. (질문) 셀 안에 UIImageView와 UILabel 넣기
     
     //셀의 재사용을 위해 사용될 식별자
-    static let cellId = "CellId"
+    static let cellId = "collectionViewCell"
     
     //UIImageView, UILabel 객체화
     let imageView = UIImageView()
@@ -177,14 +175,14 @@ class MenuCell: UICollectionViewCell {
     // 초기화
     override init(frame: CGRect) {
         super.init(frame: frame)
-        cellViews()
+        viewCell()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func cellViews() {
+    private func viewCell() {
         // imageView 설정
         backgroundColor = .white
         imageView.contentMode = .scaleAspectFit

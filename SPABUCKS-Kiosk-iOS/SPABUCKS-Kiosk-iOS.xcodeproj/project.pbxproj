@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1BD6AABA2B3D3C7700941ED9 /* SpabucksOrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD6AAB92B3D3C7700941ED9 /* SpabucksOrderItem.swift */; };
-		1BD6AABC2B3D479100941ED9 /* OrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD6AABB2B3D479100941ED9 /* OrderListTableViewCell.swift */; };
 		37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112172B3AB8FC003740CF /* AppDelegate.swift */; };
 		37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112192B3AB8FC003740CF /* SceneDelegate.swift */; };
 		37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1121B2B3AB8FC003740CF /* ViewController.swift */; };
@@ -21,11 +19,10 @@
 		37E112392B3ABD99003740CF /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112382B3ABD99003740CF /* MenuView.swift */; };
 		37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1123A2B3ABDB9003740CF /* OrderListView.swift */; };
 		C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */; };
+		C811ACE42B3D461700E065AC /* Eatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE32B3D461700E065AC /* Eatable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1BD6AAB92B3D3C7700941ED9 /* SpabucksOrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpabucksOrderItem.swift; sourceTree = "<group>"; };
-		1BD6AABB2B3D479100941ED9 /* OrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListTableViewCell.swift; sourceTree = "<group>"; };
 		37E112142B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPABUCKS-Kiosk-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E112172B3AB8FC003740CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37E112192B3AB8FC003740CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,7 +36,8 @@
 		37E112362B3ABBE2003740CF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		37E112382B3ABD99003740CF /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		37E1123A2B3ABDB9003740CF /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
-		C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpabucksMenuItem.swift; sourceTree = "<group>"; };
+		C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpabucksMenuItem.swift; path = ../../../Global/SpabucksMenuItem.swift; sourceTree = "<group>"; };
+		C811ACE32B3D461700E065AC /* Eatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Eatable.swift; path = ../../../Global/Eatable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +82,6 @@
 			children = (
 				37E1122F2B3ABA2F003740CF /* Extensions */,
 				37E1122E2B3AB9E3003740CF /* Components */,
-				C8095C942B3C12B500009E46 /* Model */,
 				37E1122C2B3AB957003740CF /* Supports */,
 			);
 			path = Global;
@@ -131,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				37E112362B3ABBE2003740CF /* HeaderView.swift */,
-				37E112382B3ABD99003740CF /* MenuView.swift */,
+				C811ACE52B3D5EB000E065AC /* MenuVIew */,
 				37E1123A2B3ABDB9003740CF /* OrderListView.swift */,
 				1BD6AABB2B3D479100941ED9 /* OrderListTableViewCell.swift */,
 			);
@@ -146,11 +143,20 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		C8095C942B3C12B500009E46 /* Model */ = {
+		C811ACE52B3D5EB000E065AC /* MenuVIew */ = {
+			isa = PBXGroup;
+			children = (
+				37E112382B3ABD99003740CF /* MenuView.swift */,
+				C811ACE62B3D5EBC00E065AC /* Model */,
+			);
+			path = MenuVIew;
+			sourceTree = "<group>";
+		};
+		C811ACE62B3D5EBC00E065AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */,
-				1BD6AAB92B3D3C7700941ED9 /* SpabucksOrderItem.swift */,
+				C811ACE32B3D461700E065AC /* Eatable.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -231,12 +237,11 @@
 				37E112312B3ABA46003740CF /* UIViewController+Extension.swift in Sources */,
 				37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */,
 				37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */,
-				1BD6AABA2B3D3C7700941ED9 /* SpabucksOrderItem.swift in Sources */,
 				37E112332B3ABB3A003740CF /* ColorButton.swift in Sources */,
 				C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */,
 				37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */,
 				37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */,
-				1BD6AABC2B3D479100941ED9 /* OrderListTableViewCell.swift in Sources */,
+				C811ACE42B3D461700E065AC /* Eatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
