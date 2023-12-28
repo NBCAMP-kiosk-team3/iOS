@@ -14,6 +14,16 @@ import UIKit
 
 class HeaderView: UIView {
     
+    let beverageMenuButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white
+        button.setTitle("음료", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        // 1.self 대신 viewcontroller로 타겟을 설정 -> vc에서 헤더뷰에 접근해서 addTarget을
+        // 2.
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
