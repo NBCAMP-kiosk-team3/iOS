@@ -10,25 +10,26 @@ import UIKit
 
 class MenuView: UIView {
 
-//MARK: - 메뉴 프로퍼티 정의
+// MARK: - 메뉴 프로퍼티 정의
+    
     var dataSource: [SpabucksMenuItem] = []
     var drinkItems: [SpabucksMenuItem] = [
-        SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano"),
-        SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato"),
-        SpabucksMenuItem(id: 2, name: "Flat White", imageName: "flat_white"),
-        SpabucksMenuItem(id: 3, name: "Caffe Latte", imageName: "Caffe Latte")]
+        SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano", price: 5.7),
+        SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato", price: 5.9),
+        SpabucksMenuItem(id: 2, name: "Flat White", imageName: "flat_white", price: 6.0),
+        SpabucksMenuItem(id: 3, name: "Caffe Latte", imageName: "Caffe Latte", price: 8.0)]
     
     var foodItems: [SpabucksMenuItem] = [
-        SpabucksMenuItem(id: 0, name: "Croissant", imageName: "croissant"),
-        SpabucksMenuItem(id: 1, name: "Sandwich", imageName: "sandwich"),
-        SpabucksMenuItem(id: 2, name: "Salad", imageName: "salad"),
-        SpabucksMenuItem(id: 3, name: "Scorn", imageName: "scorn")]
+        SpabucksMenuItem(id: 0, name: "Croissant", imageName: "croissant", price: 5.0),
+        SpabucksMenuItem(id: 1, name: "Sandwich", imageName: "sandwich", price: 6.0),
+        SpabucksMenuItem(id: 2, name: "Salad", imageName: "salad", price: 6.5),
+        SpabucksMenuItem(id: 3, name: "Scorn", imageName: "scorn", price: 5.5)]
     
     var merchandiserItems: [SpabucksMenuItem] = [
-        SpabucksMenuItem(id: 0, name: "Tumbler", imageName: "Tumbler"),
-        SpabucksMenuItem(id: 1, name: "Pen", imageName: "Pen"),
-        SpabucksMenuItem(id: 2, name: "Notebook", imageName: "Notebook"),
-        SpabucksMenuItem(id: 3, name: "Tent", imageName: "Tent")]
+        SpabucksMenuItem(id: 0, name: "Tumbler", imageName: "Tumbler", price: 5.5),
+        SpabucksMenuItem(id: 1, name: "Pen", imageName: "Pen", price: 15.0),
+        SpabucksMenuItem(id: 2, name: "Notebook", imageName: "Notebook", price: 12.5),
+        SpabucksMenuItem(id: 3, name: "Tent", imageName: "Tent", price: 25.0)]
     
     // collectionView를 UICollectionView의 타입으로 선언
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -50,26 +51,37 @@ extension MenuView {
         dataSource = drinkItems
         collectionView.reloadData()
     }
+    func foodMenuButton() {
+        dataSource = foodItems
+        collectionView.reloadData()
+    }
+    
+    func mdMenuButton() {
+        dataSource = merchandiserItems
+        collectionView.reloadData()
+    }
 }
 
-
 // MARK: - UICollectionViewDelegate
+
 extension MenuView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 셀 선택 시 처리할 내용
-        print("select")
+        print("Selected: \(dataSource[indexPath.row])")
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
 // MARK: - UICollectionViewDataSource
+
 extension MenuView: UICollectionViewDataSource {
     // 컬랙션 뷰의 아이템이 몇개인지 -> Items 프로퍼티 갯수에 따라 변경
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    // 컬랙션뷰 하나의 단위가 Cell, 어떤 모양의 cell인지
-    // UIKit이 아래 매소드를 호출
+    // 컬랙션뷰 하나의 단위가 cell이라고 한다. 어떤 모양의 cell인지
+    // UIKit이 아래 매소드(collectionView ~ cellForItemAt)를 호출
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CellId", for: indexPath) as? MenuCell else {
             return UICollectionViewCell()
@@ -77,13 +89,15 @@ extension MenuView: UICollectionViewDataSource {
         //
         cell.imageView.image = UIImage(named: dataSource[indexPath.row].imageName)
         cell.nameLabel.text = dataSource[indexPath.row].name
-        print(indexPath)
-        print(dataSource[indexPath.row])
+        cell.priceLabel.text = String(dataSource[indexPath.row].price)
+//        print(indexPath)
+//        print(dataSource[indexPath.row])
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
+
 extension MenuView: UICollectionViewDelegateFlowLayout {
     
     // 컬랙션뷰의 셀의 크기를 반환하는 매서드
@@ -133,7 +147,7 @@ extension MenuView {
         collectionView.delegate = self // UICollectionViewDataSource 프로토콜 준수
         //collectionView에 사용할 셀 클래스 등록 MenuCell을 클래스로 사용, 식별자로 MenuCell.cellId 사용
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.cellId)
-        collectionView.backgroundColor = .blue //collectionView 배경색 :
+        collectionView.backgroundColor = .white //collectionView 배경색 :
         addSubview(collectionView) // collectionView를 MenuView에 추가
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false //오토레이아웃을 사용하지 않도록 설정
@@ -158,6 +172,7 @@ class MenuCell: UICollectionViewCell {
     //UIImageView, UILabel 객체화
     let imageView = UIImageView()
     let nameLabel = UILabel()
+    let priceLabel = UILabel()
     
     // 초기화
     override init(frame: CGRect) {
@@ -171,29 +186,36 @@ class MenuCell: UICollectionViewCell {
     
     private func cellViews() {
         // imageView 설정
-        backgroundColor = .yellow
+        backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false //오토레이아웃 비동기화
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10), // 위 여백
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10), // 왼쪽 여백
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10), // 아래 여백
             imageView.widthAnchor.constraint(equalToConstant: 50), //이미지 넓이
             imageView.heightAnchor.constraint(equalToConstant: 50) //이미지 높이
         ])
             
         // nameLabel 설정
-        nameLabel.textAlignment = .center
+        nameLabel.textAlignment = .left
         contentView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-        nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 3),
-        nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-        nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 5)
+            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10), // 레이블 위 여백
+            nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5), // 이미지로부터 왼쪽 여백
+            nameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor), // 레이블 중앙 위치
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 5) // 오른쪽 여백
+        ])
+        
+        priceLabel.textAlignment = .left
+        contentView.addSubview(priceLabel)
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            priceLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor, constant: 30), // 레이블 위 여백
+            priceLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5), // 이미지로부터 왼쪽 여백
+            priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 5) // 오른쪽 여백
         ])
     }
-
 }
-
