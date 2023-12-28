@@ -36,20 +36,20 @@ class OrderListView: UIView {
         return label
     }()
     
-    let cancelBtn: ColorButton = {
+    let cancelButton: ColorButton = {
         let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
         return button
     }()
     
-    let paymentBtn: ColorButton = {
+    let paymentButton: ColorButton = {
         let button = ColorButton(title: "결제하기", color: UIColor.red)
         
         return button
     }()
     
-    let callEmployeeBtn: ColorButton = {
+    let callEmployeeButton: ColorButton = {
         let margin = 10.0
         let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
