@@ -9,6 +9,13 @@ import UIKit
 
 class OrderListView: UIView {
     
+    // MARK: - Properties
+    
+    var tempOrderList: [SpabucksOrderItem] = [
+        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano")),
+        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato"), orderCount: 3)
+    ]
+    
     // MARK: - UI Properties
     
     let countLabel: UILabel = {
@@ -50,7 +57,6 @@ class OrderListView: UIView {
     }()
     
     let callEmployeeButton: ColorButton = {
-        let margin = 10.0
         let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
@@ -119,15 +125,27 @@ extension OrderListView {
         stackView.spacing = 15
         stackView.heightAnchor.constraint(equalToConstant: 65).isActive = true
         
-        cancelBtn.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        paymentBtn.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
-        callEmployeeBtn.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
+        cancelButton.addTarget(cancelButton, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        paymentButton.addTarget(paymentButton, action: #selector(paymentButtonTapped), for: .touchUpInside)
+        callEmployeeButton.addTarget(callEmployeeButton, action: #selector(paymentButtonTapped), for: .touchUpInside)
         
-        [cancelBtn, paymentBtn, callEmployeeBtn].forEach {
+        [callEmployeeButton, cancelButton, paymentButton].forEach {
             stackView.addArrangedSubview($0)
         }
         
         return stackView
+    }
+    
+    private func createTableView() -> UITableView {
+        let tableView = UITableView()
+        tableView.backgroundColor = .white
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.cellID)
+        tableView.rowHeight = 100.0
+        
+        return tableView
     }
     
     @objc private func cancelButtonTapped() {
@@ -141,28 +159,23 @@ extension OrderListView {
     @objc private func callEmployeeTapped() {
         print("직원호출 버튼이 클릭되었습니다.")
     }
-    
-    private func createTableView() -> UITableView {
-        let tableView = UITableView()
-        tableView.backgroundColor = .white
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        
-        return tableView
-    }
 }
 
 extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return tempOrderList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = "Row \(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.cellID, for: indexPath) as! OrderListTableViewCell
+        cell.selectionStyle = .none
+        
+        cell.itemImageView.image = UIImage(named: tempOrderList[indexPath.row].menuItem.imageName)
+        cell.itemNameLabel.text = tempOrderList[indexPath.row].menuItem.name
+        cell.itemPriceLabel.text = "\(tempOrderList[indexPath.row].menuItem.id) 원"
+        cell.quantityLabel.text = String(tempOrderList[indexPath.row].orderCount)
+        
         return cell
     }
     
