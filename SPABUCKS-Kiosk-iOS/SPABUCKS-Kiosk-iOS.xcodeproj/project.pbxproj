@@ -22,6 +22,7 @@
 		37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1123A2B3ABDB9003740CF /* OrderListView.swift */; };
 		C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */; };
 		C811ACE42B3D461700E065AC /* Eatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE32B3D461700E065AC /* Eatable.swift */; };
+		C811ACE82B3D716C00E065AC /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE72B3D716C00E065AC /* MenuCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		37E1123A2B3ABDB9003740CF /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
 		C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpabucksMenuItem.swift; path = ../../../Global/SpabucksMenuItem.swift; sourceTree = "<group>"; };
 		C811ACE32B3D461700E065AC /* Eatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Eatable.swift; path = ../../../Global/Eatable.swift; sourceTree = "<group>"; };
+		C811ACE72B3D716C00E065AC /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				37E112382B3ABD99003740CF /* MenuView.swift */,
+				C811ACE72B3D716C00E065AC /* MenuCell.swift */,
 				C811ACE62B3D5EBC00E065AC /* Model */,
 			);
 			path = MenuVIew;
@@ -264,6 +267,7 @@
 				37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */,
 				37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */,
 				1B4089EC2B3D6D6600796E95 /* SpabucksOrderItem.swift in Sources */,
+				C811ACE82B3D716C00E065AC /* MenuCell.swift in Sources */,
 				C811ACE42B3D461700E065AC /* Eatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
