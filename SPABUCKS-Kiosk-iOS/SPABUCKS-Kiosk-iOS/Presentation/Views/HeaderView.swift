@@ -14,12 +14,43 @@ import UIKit
 
 class HeaderView: UIView {
     
+    let spabucksNameLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .systemPink
+        label.text = "SPABUCKS"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+    
     let beverageMenuButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .white
         button.setTitle("음료", for: .normal)
+        button.frame.size.width = 100
+        button.frame.size.height = 50
+        button.layer.cornerRadius = 20
         button.setTitleColor(.black, for: .normal)
-        // 1.self 대신 viewcontroller로 타겟을 설정 -> vc에서 헤더뷰에 접근해서 addTarget을 설정
+        return button
+    }()
+    
+    let foodMenuButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("푸드", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.frame.size.width = 100
+        button.frame.size.height = 50
+        button.layer.cornerRadius = 20
+        return button
+    }()
+    
+    let mdMenuButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("상품", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.frame.size.width = 100
+        button.frame.size.height = 50
+        button.layer.cornerRadius = 20
         return button
     }()
     
@@ -36,6 +67,7 @@ class HeaderView: UIView {
 
 extension HeaderView {
     private func setUI() {
+        
         self.backgroundColor = .systemPink
         heightAnchor.constraint(equalToConstant: 65 + 50).isActive = true
         
@@ -49,6 +81,7 @@ extension HeaderView {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(stackView)
+        stackView.addArrangedSubview(spabucksNameLabel)
         stackView.addArrangedSubview(makeCategory())
         
         NSLayoutConstraint.activate([
@@ -62,24 +95,6 @@ extension HeaderView {
     private func makeCategory() -> UIStackView {
         self.backgroundColor = .systemGray6
         
-        
-        
-        let foodMenuButton: UIButton = {
-            let button = UIButton()
-            button.setTitle("푸드", for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.addTarget(self, action: #selector(tapFoodButton), for: .touchUpInside)
-            return button
-        }()
-        
-        let mdMenuButton: UIButton = {
-            let button = UIButton()
-            button.setTitle("상품", for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.addTarget(self, action: #selector(tapMDButton), for: .touchUpInside)
-            return button
-        }()
-
         let stackView: UIStackView = {
             let stackView = UIStackView()
             stackView.axis = .horizontal
@@ -95,24 +110,7 @@ extension HeaderView {
         stackView.addArrangedSubview(foodMenuButton)
         stackView.addArrangedSubview(mdMenuButton)
         
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-        ])
-        
         return stackView
     }
-    
-    //tapBeverageButton에서 버튼에 접근
 
-    
-    @objc private func tapFoodButton() {
-        print("푸드 메뉴가 선택되었습니다.")
-    }
-    
-    @objc private func tapMDButton() {
-        print("상품 메뉴가 선택되었습니다.")
-    }
 }
