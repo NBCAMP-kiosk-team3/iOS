@@ -142,7 +142,7 @@ extension OrderListView {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.cellID)
+        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
         tableView.rowHeight = 100.0
         
         return tableView
@@ -168,7 +168,7 @@ extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.cellID, for: indexPath) as! OrderListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         cell.selectionStyle = .none
         
         cell.itemImageView.image = UIImage(named: tempOrderList[indexPath.row].menuItem.imageName)

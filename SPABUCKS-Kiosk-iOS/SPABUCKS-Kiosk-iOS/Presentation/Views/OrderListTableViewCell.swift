@@ -11,7 +11,7 @@ class OrderListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    static let cellID = "tableViewCell"
+    static let identifier = "tableViewCell"
     
     // MARK: - UI Properties
     
