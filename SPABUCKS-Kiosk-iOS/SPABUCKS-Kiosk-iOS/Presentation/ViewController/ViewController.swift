@@ -24,6 +24,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         headerView.beverageMenuButton.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
+        headerView.foodMenuButton.addTarget(self, action: #selector(tapFoodButton), for: .touchUpInside)
+        headerView.mdMenuButton.addTarget(self, action: #selector(tapMDButton), for: .touchUpInside)
+    
         setUI()
         setLayout()
     }
@@ -33,12 +36,24 @@ class ViewController: UIViewController {
 
 extension ViewController {
     @objc private func tapBeverageButton() {
-        print("음료 메뉴가 선택되었습니다.")
-        // vc. 매서드 호출 -> delegate로 구현 delegate.매서드 / protocol로 delegate를 구현
-        // 헤더뷰가 아닌 delegate(위임자)가 대신 실행
-        // 탭 했을 때, 메뉴뷰에게 음료를 보여줘
+        headerView.mdMenuButton.backgroundColor = .clear
+        headerView.foodMenuButton.backgroundColor = .clear
+        headerView.beverageMenuButton.backgroundColor = .white
         menuView.showBeverageView()
-        
+    }
+    
+    @objc private func tapFoodButton() {
+        headerView.mdMenuButton.backgroundColor = .clear
+        headerView.beverageMenuButton.backgroundColor = .clear
+        headerView.foodMenuButton.backgroundColor = .white
+        menuView.showFoodMenuView()
+    }
+    
+    @objc private func tapMDButton() {
+        headerView.beverageMenuButton.backgroundColor = .clear
+        headerView.foodMenuButton.backgroundColor = .clear
+        headerView.mdMenuButton.backgroundColor = .white
+        menuView.showMdMenuView()
     }
     
     private func setUI() {
