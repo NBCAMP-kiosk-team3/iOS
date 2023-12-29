@@ -15,16 +15,16 @@ class OrderListView: UIView {
     
     // MARK: - UI Properties
     
-    let orderListTable = UITableView()
+    private let orderListTable = UITableView()
     
-    let countLabel: UILabel = {
+    private let countLabel: UILabel = {
         let label = UILabel()
         label.text = "4개"
         
         return label
     }()
     
-    let priceTitleLabel: UILabel = {
+    private let priceTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "총 주문 가격"
         label.textAlignment = .right
@@ -32,7 +32,7 @@ class OrderListView: UIView {
         return label
     }()
     
-    let priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel()
         label.text = "20,000원"
         label.font = UIFont.boldSystemFont(ofSize: 20).withSize(20.0)
@@ -42,20 +42,20 @@ class OrderListView: UIView {
         return label
     }()
     
-    let cancelButton: ColorButton = {
+    private let cancelButton: ColorButton = {
         let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
         return button
     }()
     
-    let paymentButton: ColorButton = {
+    private let paymentButton: ColorButton = {
         let button = ColorButton(title: "결제하기", color: UIColor.systemPink)
         
         return button
     }()
     
-    let callEmployeeButton: ColorButton = {
+    private let callEmployeeButton: ColorButton = {
         let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
