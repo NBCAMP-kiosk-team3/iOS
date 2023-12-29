@@ -22,11 +22,7 @@ class OrderListTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    let itemNameLabel: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
+    let itemNameLabel = UILabel()
     
     let itemPriceLabel: UILabel = {
         let label = UILabel()
@@ -35,11 +31,7 @@ class OrderListTableViewCell: UITableViewCell {
         return label
     }()
     
-    let quantityLabel: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
+    let quantityLabel = UILabel()
     
     let minusButton: ColorButton = {
         let button = ColorButton(title: "-", color: UIColor.systemGray5)
@@ -63,10 +55,6 @@ class OrderListTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Life Cycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
