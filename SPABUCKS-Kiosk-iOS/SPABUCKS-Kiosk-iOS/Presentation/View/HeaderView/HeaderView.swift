@@ -15,8 +15,8 @@ class HeaderView: UIView {
         let label = UILabel()
         label.backgroundColor = .systemPink
         label.text = "SPABUCKS"
+        label.font = UIFont(name: "BlackHanSans-Regular", size: 30)
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
         
         return label

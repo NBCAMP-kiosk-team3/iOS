@@ -20,6 +20,7 @@
 		37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112362B3ABBE2003740CF /* HeaderView.swift */; };
 		37E112392B3ABD99003740CF /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112382B3ABD99003740CF /* MenuView.swift */; };
 		37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1123A2B3ABDB9003740CF /* OrderListView.swift */; };
+		73868C6D2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73868C6C2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf */; };
 		C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */; };
 		C811ACE42B3D461700E065AC /* Eatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE32B3D461700E065AC /* Eatable.swift */; };
 		C811ACE82B3D716C00E065AC /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE72B3D716C00E065AC /* MenuCell.swift */; };
@@ -41,6 +42,7 @@
 		37E112362B3ABBE2003740CF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		37E112382B3ABD99003740CF /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		37E1123A2B3ABDB9003740CF /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
+		73868C6C2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpabucksMenuItem.swift; sourceTree = "<group>"; };
 		C811ACE32B3D461700E065AC /* Eatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eatable.swift; sourceTree = "<group>"; };
 		C811ACE72B3D716C00E065AC /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		37E1122B2B3AB950003740CF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				73868C6B2B3E90C6006CF5C7 /* Font */,
 				37E1122F2B3ABA2F003740CF /* Extensions */,
 				37E1122E2B3AB9E3003740CF /* Components */,
 				37E1122C2B3AB957003740CF /* Supports */,
@@ -190,6 +193,14 @@
 				37E1121B2B3AB8FC003740CF /* ViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		73868C6B2B3E90C6006CF5C7 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				73868C6C2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		C811ACE52B3D5EB000E065AC /* MenuView */ = {
@@ -259,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73868C6D2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf in Resources */,
 				37E112242B3AB8FE003740CF /* LaunchScreen.storyboard in Resources */,
 				37E112212B3AB8FE003740CF /* Assets.xcassets in Resources */,
 				37E1121F2B3AB8FC003740CF /* Main.storyboard in Resources */,

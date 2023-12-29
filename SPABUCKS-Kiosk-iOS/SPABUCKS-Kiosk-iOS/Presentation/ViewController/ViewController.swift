@@ -33,6 +33,7 @@ class ViewController: UIViewController {
 // MARK: - Extensions
 
 extension ViewController {
+    
     @objc private func tapBeverageButton() {
         headerView.mdMenuButton.backgroundColor = .clear
         headerView.foodMenuButton.backgroundColor = .clear
