@@ -66,8 +66,8 @@ extension MenuView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 셀 선택 시 처리할 내용
         print("Selected: \(dataSource[indexPath.row])")
-        let selectedData = dataSource[indexPath.row] // 선택된 셀의 데이터
-        let orderListView = OrderListView()
+//        let selectedData = dataSource[indexPath.row] // 선택된 셀의 데이터
+//        let orderListView = OrderListView()
 //        orderListView.tempOrderList.append(selectedData)
         
         collectionView.deselectItem(at: indexPath, animated: true)
@@ -82,18 +82,18 @@ extension MenuView: UICollectionViewDataSource {
         
         return dataSource.count
     }
-    
+    //guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCell.identifier, for: indexPath) as? MenuCell else { }
     // 컬랙션뷰 하나의 단위가 cell이라고 한다. 어떤 모양의 cell인지
     // UIKit이 아래 매소드(collectionView ~ cellForItemAt)를 호출
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as? MenuCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCell.collectionViewCellIdentifier, for: indexPath) as? MenuCell else {
             
             return UICollectionViewCell()
         }
         //
         cell.imageView.image = UIImage(named: dataSource[indexPath.row].imageName)
         cell.nameLabel.text = dataSource[indexPath.row].name
-        cell.priceLabel.text = String("\(dataSource[indexPath.row].price) 원")
+        cell.priceLabel.text = String("\(Int(dataSource[indexPath.row].price)) 원")
         //        print(indexPath)
         //        print(dataSource[indexPath.row])
         return cell
@@ -154,7 +154,7 @@ extension MenuView {
         collectionView.dataSource = self // UICollectionViewDataSource 프로토콜 준수
         collectionView.delegate = self // UICollectionViewDataSource 프로토콜 준수
         //collectionView에 사용할 셀 클래스 등록 MenuCell을 클래스로 사용, 식별자로 MenuCell.cellId 사용
-        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.cellId)
+        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.collectionViewCellIdentifier)
         collectionView.backgroundColor = .white//collectionView 배경색 :
         addSubview(collectionView) // collectionView를 MenuView에 추가
         

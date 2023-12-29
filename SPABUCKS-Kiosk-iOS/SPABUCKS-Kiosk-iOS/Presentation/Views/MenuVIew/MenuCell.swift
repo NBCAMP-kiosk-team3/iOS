@@ -11,7 +11,7 @@ import UIKit
 
 class MenuCell: UICollectionViewCell {
     //셀의 재사용을 위해 사용될 식별자
-    static let cellId = "collectionViewCell"
+    static let collectionViewCellIdentifier = "CollectionViewCellIdentifier"
     
     //UIImageView, UILabel 객체화
     let imageView = UIImageView()
