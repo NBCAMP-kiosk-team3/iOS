@@ -23,12 +23,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerView.beverageMenuButton.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
-        headerView.foodMenuButton.addTarget(self, action: #selector(tapFoodButton), for: .touchUpInside)
-        headerView.mdMenuButton.addTarget(self, action: #selector(tapMDButton), for: .touchUpInside)
     
         setUI()
         setLayout()
+        setupButtonTargets()
     }
 }
 
@@ -74,6 +72,12 @@ extension ViewController {
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func setupButtonTargets() {
+        headerView.beverageMenuButton.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
+        headerView.foodMenuButton.addTarget(self, action: #selector(tapFoodButton), for: .touchUpInside)
+        headerView.mdMenuButton.addTarget(self, action: #selector(tapMDButton), for: .touchUpInside)
     }
     
     private func createStackView() -> UIStackView {
