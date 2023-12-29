@@ -18,6 +18,16 @@ class OrderListView: UIView {
     
     // MARK: - UI Properties
     
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .white
+        
+        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
+        tableView.rowHeight = 100.0
+        
+        return tableView
+    }()
+    
     let countLabel: UILabel = {
         let label = UILabel()
         label.text = "4개"
@@ -138,13 +148,9 @@ extension OrderListView {
     }
     
     private func createTableView() -> UITableView {
-        let tableView = UITableView()
-        tableView.backgroundColor = .white
-        
+        let tableView = self.tableView
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
-        tableView.rowHeight = 100.0
         
         return tableView
     }
