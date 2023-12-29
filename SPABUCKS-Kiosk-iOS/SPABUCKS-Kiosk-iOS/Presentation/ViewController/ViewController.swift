@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         headerView.beverageMenuButton.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
+        headerView.foodMenuButton.addTarget(self, action: #selector(tapFoodButton), for: .touchUpInside)
+        headerView.mdMenuButton.addTarget(self, action: #selector(tapMDButton), for: .touchUpInside)
     
         setUI()
         setLayout()
@@ -34,16 +36,24 @@ class ViewController: UIViewController {
 
 extension ViewController {
     @objc private func tapBeverageButton() {
+        headerView.mdMenuButton.backgroundColor = .clear
+        headerView.foodMenuButton.backgroundColor = .clear
         headerView.beverageMenuButton.backgroundColor = .white
         menuView.showBeverageView()
     }
     
     @objc private func tapFoodButton() {
-        print("푸드 메뉴가 선택되었습니다.")
+        headerView.mdMenuButton.backgroundColor = .clear
+        headerView.beverageMenuButton.backgroundColor = .clear
+        headerView.foodMenuButton.backgroundColor = .white
+        menuView.foodMenuButton()
     }
     
     @objc private func tapMDButton() {
-        print("상품 메뉴가 선택되었습니다.")
+        headerView.beverageMenuButton.backgroundColor = .clear
+        headerView.foodMenuButton.backgroundColor = .clear
+        headerView.mdMenuButton.backgroundColor = .white
+        menuView.mdMenuButton()
     }
     
     private func setUI() {

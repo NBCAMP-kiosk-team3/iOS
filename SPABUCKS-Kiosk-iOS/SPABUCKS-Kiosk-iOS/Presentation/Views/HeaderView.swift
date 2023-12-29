@@ -9,6 +9,8 @@ import UIKit
 
 class HeaderView: UIView {
     
+    // MARK: - UI Properties
+    
     let spabucksNameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .systemPink
@@ -16,6 +18,7 @@ class HeaderView: UIView {
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
+        
         return label
     }()
     
@@ -26,6 +29,10 @@ class HeaderView: UIView {
         button.frame.size.height = 50
         button.layer.cornerRadius = 20
         button.setTitleColor(.black, for: .normal)
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize.zero
+        
         return button
     }()
     
@@ -36,6 +43,10 @@ class HeaderView: UIView {
         button.frame.size.width = 100
         button.frame.size.height = 50
         button.layer.cornerRadius = 20
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize.zero
+        
         return button
     }()
     
@@ -46,6 +57,10 @@ class HeaderView: UIView {
         button.frame.size.width = 100
         button.frame.size.height = 50
         button.layer.cornerRadius = 20
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize.zero
+        
         return button
     }()
     
@@ -60,6 +75,8 @@ class HeaderView: UIView {
     }
 }
 
+// MARK: - Extensions
+
 extension HeaderView {
     private func setUI() {
         
@@ -70,6 +87,7 @@ extension HeaderView {
             let stackView = UIStackView()
             stackView.axis = .vertical
             stackView.distribution = .fillEqually
+            
             return stackView
         }()
         
@@ -95,6 +113,7 @@ extension HeaderView {
             stackView.distribution = .fillEqually
             stackView.alignment = .center
             stackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            
             return stackView
         }()
         
