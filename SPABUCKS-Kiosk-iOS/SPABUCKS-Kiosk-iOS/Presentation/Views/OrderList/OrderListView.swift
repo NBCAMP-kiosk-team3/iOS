@@ -37,7 +37,7 @@ class OrderListView: UIView {
         let label = UILabel()
         label.text = "20,000원"
         label.font = UIFont.boldSystemFont(ofSize: 20).withSize(20.0)
-        label.textColor = .systemRed
+        label.textColor = .systemPink
         label.textAlignment = .right
         
         return label
@@ -51,7 +51,7 @@ class OrderListView: UIView {
     }()
     
     let paymentButton: ColorButton = {
-        let button = ColorButton(title: "결제하기", color: UIColor.red)
+        let button = ColorButton(title: "결제하기", color: UIColor.systemPink)
         
         return button
     }()
@@ -73,6 +73,11 @@ class OrderListView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getOrderItem(_ item: SpabucksMenuItem) {
+        let orderItem = SpabucksOrderItem(menuItem: item)
+        tempOrderList.append(orderItem)
     }
 }
 
@@ -125,10 +130,6 @@ extension OrderListView {
         stackView.spacing = 15
         stackView.heightAnchor.constraint(equalToConstant: 65).isActive = true
         
-        cancelButton.addTarget(cancelButton, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        paymentButton.addTarget(paymentButton, action: #selector(paymentButtonTapped), for: .touchUpInside)
-        callEmployeeButton.addTarget(callEmployeeButton, action: #selector(paymentButtonTapped), for: .touchUpInside)
-        
         [callEmployeeButton, cancelButton, paymentButton].forEach {
             stackView.addArrangedSubview($0)
         }
@@ -147,18 +148,6 @@ extension OrderListView {
         
         return tableView
     }
-    
-    @objc private func cancelButtonTapped() {
-        print("취소 버튼이 클릭되었습니다.")
-    }
-
-    @objc private func paymentButtonTapped() {
-        print("결제 버튼이 클릭되었습니다.")
-    }
-    
-    @objc private func callEmployeeTapped() {
-        print("직원호출 버튼이 클릭되었습니다.")
-    }
 }
 
 extension OrderListView: UITableViewDataSource, UITableViewDelegate {
@@ -173,13 +162,9 @@ extension OrderListView: UITableViewDataSource, UITableViewDelegate {
         
         cell.itemImageView.image = UIImage(named: tempOrderList[indexPath.row].menuItem.imageName)
         cell.itemNameLabel.text = tempOrderList[indexPath.row].menuItem.name
-        cell.itemPriceLabel.text = "\(tempOrderList[indexPath.row].menuItem.id) 원"
+        cell.itemPriceLabel.text = "\(tempOrderList[indexPath.row].menuItem.price) 원"
         cell.quantityLabel.text = String(tempOrderList[indexPath.row].orderCount)
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: Cell 선택했을 때
     }
 }

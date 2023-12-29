@@ -49,7 +49,7 @@ class OrderListTableViewCell: UITableViewCell {
     }()
     
     let plusButton: ColorButton = {
-        let button = ColorButton(title: "+", color: UIColor.red)
+        let button = ColorButton(title: "+", color: UIColor.systemPink)
         
         return button
     }()
