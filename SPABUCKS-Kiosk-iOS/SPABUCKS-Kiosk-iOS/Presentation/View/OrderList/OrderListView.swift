@@ -11,18 +11,16 @@ class OrderListView: UIView {
     
     // MARK: - Properties
     
-    var orderList: [SpabucksOrderItem] = []
+    var orderList: [SpabucksOrderItem] = [
+        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Croissant", imageName: "croissant", price: 5000)),
+        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 3, name: "Caffe Latte", imageName: "Caffe Latte", price: 8000))
+    ]
     
     // MARK: - UI Properties
     
     private let orderListTable = UITableView()
     
-    private let countLabel: UILabel = {
-        let label = UILabel()
-        label.text = "4개"
-        
-        return label
-    }()
+    private let countLabel = UILabel()
     
     private let priceTitleLabel: UILabel = {
         let label = UILabel()
@@ -34,7 +32,6 @@ class OrderListView: UIView {
     
     private let priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "20,000원"
         label.font = UIFont.boldSystemFont(ofSize: 20).withSize(20.0)
         label.textColor = .systemPink
         label.textAlignment = .right
@@ -90,15 +87,36 @@ class OrderListView: UIView {
     private func updateOrderListTable() {
         let indexPath = IndexPath(row: self.orderList.count-1, section: 0)
         orderListTable.insertRows(at: [indexPath], with: .automatic)
+        
+        setTotalOrderInfo()
+    }
+    
+    @objc private func tapPaymentButton() {
+        var totalPrice: Double = 0
+        
+        for i in 0 ..< orderList.count {
+            totalPrice += orderList[i].menuItem.price * Double(orderList[i].orderCount)
+        }
+        
+        print("결제하기: \(totalPrice)")
     }
 }
 
 // MARK: - Extensions
 
 extension OrderListView {
+    private func setAddTarget() {
+        paymentButton.addTarget(self, action: #selector(tapPaymentButton), for: .touchUpInside)
+    }
+    
     private func setUI() {
+        
+        setAddTarget()
+        
         backgroundColor = .systemGray6
         heightAnchor.constraint(equalToConstant: 317 + 45).isActive = true
+        
+        setTotalOrderInfo()
         
         let verticalStackView = UIStackView()
         verticalStackView.axis = .vertical
@@ -163,6 +181,20 @@ extension OrderListView {
 
 extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     
+    func setTotalOrderInfo() {
+        let orderListCount = orderList.count
+        var totalPrice: Double = 0
+        var totalCount: Int = 0
+        
+        for i in 0 ..< orderListCount {
+            totalPrice += orderList[i].menuItem.price * Double(orderList[i].orderCount)
+            totalCount += orderList[i].orderCount
+        }
+        
+        countLabel.text = "\(totalCount) 개"
+        priceLabel.text = "\(totalPrice.formattedString())원"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orderList.count
     }
@@ -171,11 +203,46 @@ extension OrderListView: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         cell.selectionStyle = .none
         
+        cell.onMinusButton = { [weak self] in
+            self?.updateOrderCount(at: indexPath, delta: -1)
+        }
+        
+        cell.onPlusButton = { [weak self] in
+            self?.updateOrderCount(at: indexPath, delta: 1)
+        }
+        
+        cell.onDeleteButton = { [weak self] in
+            self?.deleteOrder(at: indexPath)
+        }
+        
         cell.itemImageView.image = UIImage(named: orderList[indexPath.row].menuItem.imageName)
         cell.itemNameLabel.text = orderList[indexPath.row].menuItem.name
-        cell.itemPriceLabel.text = "\(orderList[indexPath.row].menuItem.price) 원"
-        cell.quantityLabel.text = String(orderList[indexPath.row].orderCount)
+        cell.itemPriceLabel.text = "\((self.orderList[indexPath.row].menuItem.price * Double(self.orderList[indexPath.row].orderCount)).formattedString()) 원"
+        cell.quantityLabel.text = String(self.orderList[indexPath.row].orderCount)
         
         return cell
+    }
+    
+    private func updateOrderCount(at indexPath: IndexPath, delta: Int) {
+        guard indexPath.row < self.orderList.count else { return }
+        
+        let newCount = self.orderList[indexPath.row].orderCount + delta
+        if newCount > 0 {
+            self.orderList[indexPath.row].orderCount = newCount
+            self.orderListTable.reloadRows(at: [indexPath], with: .automatic)
+            self.setTotalOrderInfo()
+        }
+    }
+    
+    private func deleteOrder(at indexPath: IndexPath) {
+        if indexPath.row < self.orderList.count {
+            self.orderList.remove(at: indexPath.row)
+            self.orderListTable.deleteRows(at: [indexPath], with: .automatic)
+            self.setTotalOrderInfo()
+        } else {
+            self.orderList.removeAll()
+            self.orderListTable.reloadData()
+            self.setTotalOrderInfo()
+        }
     }
 }

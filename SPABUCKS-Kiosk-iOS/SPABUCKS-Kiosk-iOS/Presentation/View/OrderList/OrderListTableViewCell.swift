@@ -13,6 +13,10 @@ class OrderListTableViewCell: UITableViewCell {
     
     static let identifier = "tableViewCell"
     
+    var onMinusButton: (() -> Void)?
+    var onPlusButton: (() -> Void)?
+    var onDeleteButton: (() -> Void)?
+    
     // MARK: - UI Properties
     
     let itemImageView: UIImageView = {
@@ -33,20 +37,20 @@ class OrderListTableViewCell: UITableViewCell {
     
     let quantityLabel = UILabel()
     
-    let minusButton: ColorButton = {
+    private let minusButton: ColorButton = {
         let button = ColorButton(title: "-", color: UIColor.systemGray5)
         button.setTitleColor(.black, for: .normal)
         
         return button
     }()
     
-    let plusButton: ColorButton = {
+    private let plusButton: ColorButton = {
         let button = ColorButton(title: "+", color: UIColor.systemPink)
         
         return button
     }()
     
-    let deleteButton: UIButton = {
+    private let deleteButton: UIButton = {
         let button = UIButton()
         button.setTitle("X", for: .normal)
         button.setTitleColor(.systemGray, for: .normal)
@@ -72,21 +76,42 @@ class OrderListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupUI()
+        setUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        setupUI()
+        setUI()
+    }
+    
+    // MARK: Button Action Method
+    
+    @objc private func tapMinusButton() {
+        onMinusButton?()
+    }
+    
+    @objc private func tapPlusButton() {
+        onPlusButton?()
+    }
+    
+    @objc private func tapDeleteButton() {
+        onDeleteButton?()
     }
 }
 
 // MARK: - Extensions
 
 extension OrderListTableViewCell {
+    private func setAddTarget() {
+        minusButton.addTarget(self, action: #selector(tapMinusButton), for: .touchUpInside)
+        plusButton.addTarget(self, action: #selector(tapPlusButton), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(tapDeleteButton), for: .touchUpInside)
+    }
     
-    private func setupUI() {
+    private func setUI() {
+        
+        setAddTarget()
         
         [itemImageView, itemNameLabel, itemPriceLabel, quantityLabel, plusButton, minusButton, deleteButton].forEach {
             contentView.addSubview($0)
