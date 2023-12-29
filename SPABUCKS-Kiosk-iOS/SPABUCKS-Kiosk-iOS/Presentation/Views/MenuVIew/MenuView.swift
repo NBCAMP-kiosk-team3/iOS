@@ -6,9 +6,13 @@
 //
 import UIKit
 
+
+
 class MenuView: UIView {
     
     // MARK: - Properties
+    
+    private let orderView =  OrderListView()
     
     var dataSource: [SpabucksMenuItem] = []
     var drinkItems: [SpabucksMenuItem] = [
@@ -67,8 +71,7 @@ extension MenuView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected: \(dataSource[indexPath.row])")
         let selectedData = dataSource[indexPath.row] // 선택된 셀의 데이터
-        let orderListView = OrderListView()
-        orderListView.getOrderItem(selectedData)
+        orderView.getOrderItem(selectedData)
         
         collectionView.deselectItem(at: indexPath, animated: true)
     }
