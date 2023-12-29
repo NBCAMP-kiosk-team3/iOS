@@ -11,22 +11,11 @@ class OrderListView: UIView {
     
     // MARK: - Properties
     
-    var tempOrderList: [SpabucksOrderItem] = [
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano", price: 5.7)),
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato", price: 5.9), orderCount: 3)
-    ]
+    var orderList: [SpabucksOrderItem] = []
     
     // MARK: - UI Properties
     
-    let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.backgroundColor = .white
-        
-        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
-        tableView.rowHeight = 100.0
-        
-        return tableView
-    }()
+    let orderListTable = UITableView()
     
     let countLabel: UILabel = {
         let label = UILabel()
@@ -87,7 +76,20 @@ class OrderListView: UIView {
     
     func getOrderItem(_ item: SpabucksMenuItem) {
         let orderItem = SpabucksOrderItem(menuItem: item)
-        tempOrderList.append(orderItem)
+        
+        setOrderItem(orderItem)
+    }
+    
+    private func setOrderItem(_ item: SpabucksOrderItem) {
+        self.orderList.append(item)
+        print(orderList)
+        
+        updateOrderListTable()
+    }
+    
+    private func updateOrderListTable() {
+        let indexPath = IndexPath(row: self.orderList.count-1, section: 0)
+        orderListTable.insertRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -148,28 +150,31 @@ extension OrderListView {
     }
     
     private func createTableView() -> UITableView {
-        let tableView = self.tableView
-        tableView.dataSource = self
-        tableView.delegate = self
+        orderListTable.dataSource = self
+        orderListTable.delegate = self
         
-        return tableView
+        orderListTable.backgroundColor = .white
+        orderListTable.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
+        orderListTable.rowHeight = 100.0
+        
+        return orderListTable
     }
 }
 
 extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tempOrderList.count
+        return orderList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         cell.selectionStyle = .none
         
-        cell.itemImageView.image = UIImage(named: tempOrderList[indexPath.row].menuItem.imageName)
-        cell.itemNameLabel.text = tempOrderList[indexPath.row].menuItem.name
-        cell.itemPriceLabel.text = "\(tempOrderList[indexPath.row].menuItem.price) 원"
-        cell.quantityLabel.text = String(tempOrderList[indexPath.row].orderCount)
+        cell.itemImageView.image = UIImage(named: orderList[indexPath.row].menuItem.imageName)
+        cell.itemNameLabel.text = orderList[indexPath.row].menuItem.name
+        cell.itemPriceLabel.text = "\(orderList[indexPath.row].menuItem.price) 원"
+        cell.quantityLabel.text = String(orderList[indexPath.row].orderCount)
         
         return cell
     }
