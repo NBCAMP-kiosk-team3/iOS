@@ -50,12 +50,12 @@ extension MenuView {
         dataSource = drinkItems
         collectionView.reloadData()
     }
-    func foodMenuView() {
+    func showFoodMenuView() {
         dataSource = foodItems
         collectionView.reloadData()
     }
     
-    func mdMenuView() {
+    func showMdMenuView() {
         dataSource = merchandiserItems
         collectionView.reloadData()
     }
@@ -65,7 +65,7 @@ extension MenuView {
 
 extension MenuView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // 셀 선택 시 처리할 내용
+        // TODO: 셀 선택 시 처리할 내용 (getOrderItem 사용해보시면 될 것 같습니다)
         print("Selected: \(dataSource[indexPath.row])")
         //        let selectedData = dataSource[indexPath.row] // 선택된 셀의 데이터
         //        let orderListView = OrderListView()

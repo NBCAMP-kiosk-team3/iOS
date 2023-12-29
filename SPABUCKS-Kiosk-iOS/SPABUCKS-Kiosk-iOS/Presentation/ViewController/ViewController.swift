@@ -46,14 +46,14 @@ extension ViewController {
         headerView.mdMenuButton.backgroundColor = .clear
         headerView.beverageMenuButton.backgroundColor = .clear
         headerView.foodMenuButton.backgroundColor = .white
-        menuView.foodMenuButton()
+        menuView.showFoodMenuView()
     }
     
     @objc private func tapMDButton() {
         headerView.beverageMenuButton.backgroundColor = .clear
         headerView.foodMenuButton.backgroundColor = .clear
         headerView.mdMenuButton.backgroundColor = .white
-        menuView.mdMenuButton()
+        menuView.showMdMenuView()
     }
     
     private func setUI() {
