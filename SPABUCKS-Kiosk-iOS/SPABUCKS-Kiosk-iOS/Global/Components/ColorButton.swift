@@ -8,23 +8,15 @@
 import UIKit
 
 final class ColorButton: UIButton {
-    
-    var tapHandler: (() -> Void)?
-    
+
     init(title: String, color: UIColor) {
         super.init(frame: .zero)
         
         setupUI(title: title, color: color)
-        
-        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    @objc private func buttonTapped() {
-        tapHandler?()
     }
 }
 
