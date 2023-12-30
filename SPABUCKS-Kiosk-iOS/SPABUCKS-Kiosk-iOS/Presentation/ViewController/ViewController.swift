@@ -55,6 +55,33 @@ extension ViewController {
         menuView.showMdMenuView()
     }
     
+    @objc private func tapCallEmployeeButton() {
+        let alert = UIAlertController(title: "직원호출", message: "직원 도움이 필요하신가요?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "네", style: .default)
+        let cancel = UIAlertAction(title: "아니오", style: .destructive)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func tapCancelButton() {
+        let alert = UIAlertController(title: "취소하기", message: "담은 메뉴를 모두 삭제할까요??", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "네", style: .default)
+        let cancel = UIAlertAction(title: "아니오", style: .destructive)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func tapPaymentButton() {
+        let alert = UIAlertController(title: "결제하기", message: "결제하시겠습니까?", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "네", style: .default)
+        let cancel = UIAlertAction(title: "아니오", style: .destructive)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
     private func setUI() {
         view.backgroundColor = .white
         
@@ -82,6 +109,9 @@ extension ViewController {
         headerView.beverageMenuButton.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
         headerView.foodMenuButton.addTarget(self, action: #selector(tapFoodButton), for: .touchUpInside)
         headerView.mdMenuButton.addTarget(self, action: #selector(tapMDButton), for: .touchUpInside)
+        orderView.callEmployeeButton.addTarget(self, action: #selector(tapCallEmployeeButton), for: .touchUpInside)
+        orderView.cancelButton.addTarget(self, action: #selector(tapCancelButton), for: .touchUpInside)
+        orderView.paymentButton.addTarget(self, action: #selector(tapPaymentButton), for: .touchUpInside)
     }
     
     private func createStackView() -> UIStackView {
