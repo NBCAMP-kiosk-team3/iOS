@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderListView: UIView {
+class OrderListView: UIView, MenuDataDelegate {
     
     // MARK: - Properties
     
@@ -71,48 +71,29 @@ class OrderListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func getOrderItem(_ item: SpabucksMenuItem) {
-        let orderItem = SpabucksOrderItem(menuItem: item)
-        
-        setOrderItem(orderItem)
+    // MARK: MenuDataDelegate setting
+    
+    func didSelectMenuItem(_ item: SpabucksMenuItem) {
+        setOrderItem(item)
+        updateOrderListTable()
     }
     
-    private func setOrderItem(_ item: SpabucksOrderItem) {
-        self.orderList.append(item)
-        print(orderList)
-        
-        updateOrderListTable()
+    private func setOrderItem(_ item: SpabucksMenuItem) {
+        let orderItemData = SpabucksOrderItem(menuItem: item)
+        orderList.append(orderItemData)
     }
     
     private func updateOrderListTable() {
         let indexPath = IndexPath(row: self.orderList.count-1, section: 0)
         orderListTable.insertRows(at: [indexPath], with: .automatic)
-        
-        setTotalOrderInfo()
     }
     
-    @objc private func tapPaymentButton() {
-        var totalPrice: Double = 0
-        
-        for i in 0 ..< orderList.count {
-            totalPrice += orderList[i].menuItem.price * Double(orderList[i].orderCount)
-        }
-        
-        print("결제하기: \(totalPrice)")
-    }
 }
 
 // MARK: - Extensions
 
 extension OrderListView {
-    private func setAddTarget() {
-        paymentButton.addTarget(self, action: #selector(tapPaymentButton), for: .touchUpInside)
-    }
-    
     private func setUI() {
-        
-        setAddTarget()
-        
         backgroundColor = .systemGray6
         heightAnchor.constraint(equalToConstant: 317 + 45).isActive = true
         

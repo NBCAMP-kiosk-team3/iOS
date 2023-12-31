@@ -8,6 +8,8 @@ import UIKit
 
 class MenuView: UIView {
     
+    weak var delegate: MenuDataDelegate?
+    
     // MARK: - Properties
     
     var dataSource: [SpabucksMenuItem] = []
@@ -69,10 +71,9 @@ extension MenuView {
 extension MenuView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: 셀 선택 시 처리할 내용 (getOrderItem 사용해보시면 될 것 같습니다)
-        print("Selected: \(dataSource[indexPath.row])")
-        //        let selectedData = dataSource[indexPath.row] // 선택된 셀의 데이터
-        //        let orderListView = OrderListView()
-        //        orderListView.tempOrderList.append(selectedData)
+        let selectedData = dataSource[indexPath.row] // 선택된 셀의 데이터
+        delegate?.didSelectMenuItem(selectedData)
+        collectionView.deselectItem(at: indexPath, animated: true)
         
         collectionView.deselectItem(at: indexPath, animated: true)
     }
