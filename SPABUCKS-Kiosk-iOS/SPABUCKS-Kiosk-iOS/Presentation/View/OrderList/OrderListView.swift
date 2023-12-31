@@ -11,10 +11,7 @@ class OrderListView: UIView, MenuDataDelegate {
     
     // MARK: - Properties
     
-    var orderList: [SpabucksOrderItem] = [
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Croissant", imageName: "croissant", price: 5000)),
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 3, name: "Caffe Latte", imageName: "Caffe Latte", price: 8000))
-    ]
+    var orderList: [SpabucksOrderItem] = [] 
     
     // MARK: - UI Properties
     
@@ -86,6 +83,8 @@ class OrderListView: UIView, MenuDataDelegate {
     private func updateOrderListTable() {
         let indexPath = IndexPath(row: self.orderList.count-1, section: 0)
         orderListTable.insertRows(at: [indexPath], with: .automatic)
+        
+        setTotalOrderInfo()
     }
     
 }
@@ -161,7 +160,6 @@ extension OrderListView {
 }
 
 extension OrderListView: UITableViewDataSource, UITableViewDelegate {
-    
     func setTotalOrderInfo() {
         let orderListCount = orderList.count
         var totalPrice: Double = 0
@@ -205,25 +203,28 @@ extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     private func updateOrderCount(at indexPath: IndexPath, delta: Int) {
-        guard indexPath.row < self.orderList.count else { return }
+        var customIndexPath = IndexPath()
         
-        let newCount = self.orderList[indexPath.row].orderCount + delta
-        if newCount > 0 {
-            self.orderList[indexPath.row].orderCount = newCount
-            self.orderListTable.reloadRows(at: [indexPath], with: .automatic)
-            self.setTotalOrderInfo()
+        if indexPath.row < orderList.count {
+            customIndexPath = indexPath
+        } else {
+            customIndexPath = IndexPath(row: self.orderList.count-1, section: 0)
+        }
+        
+        var orderItem = orderList[customIndexPath.row]
+        orderItem.orderCount += delta
+        
+        if orderItem.orderCount > 0 {
+            orderList[customIndexPath.row] = orderItem
+            
+            setTotalOrderInfo()
+            orderListTable.reloadRows(at: [customIndexPath], with: .none)
         }
     }
     
     private func deleteOrder(at indexPath: IndexPath) {
-        if indexPath.row < self.orderList.count {
-            self.orderList.remove(at: indexPath.row)
-            self.orderListTable.deleteRows(at: [indexPath], with: .automatic)
-            self.setTotalOrderInfo()
-        } else {
-            self.orderList.removeAll()
-            self.orderListTable.reloadData()
-            self.setTotalOrderInfo()
-        }
+        orderList.remove(at: indexPath.row)
+        setTotalOrderInfo()
+        orderListTable.deleteRows(at: [indexPath], with: .none)
     }
 }
