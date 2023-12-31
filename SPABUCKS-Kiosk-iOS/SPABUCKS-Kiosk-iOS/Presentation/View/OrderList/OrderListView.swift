@@ -76,7 +76,7 @@ class OrderListView: UIView, MenuDataDelegate {
         
         for i in 0 ..< orderList.count {
             if(orderList[i].menuItem.name == item.name) {
-                duplicateIndex = orderList.indices.filter({orderList[$0].menuItem.id == orderList[i].menuItem.id}).first
+                duplicateIndex = orderList.indices.filter({"\(orderList[$0].menuItem.name)-\(orderList[$0].menuItem.id)" == "\(orderList[i].menuItem.name)-\(orderList[i].menuItem.id)"}).first
                 duplicateCheck = true
                 
                 break

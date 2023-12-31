@@ -20,16 +20,16 @@ class MenuView: UIView {
         SpabucksMenuItem(id: 3, name: "Caffe Latte", imageName: "Caffe Latte", price: 8000)]
     
     var foodItems: [SpabucksMenuItem] = [
-        SpabucksMenuItem(id: 10, name: "Croissant", imageName: "croissant", price: 5000),
-        SpabucksMenuItem(id: 11, name: "Sandwich", imageName: "sandwich", price: 6000),
-        SpabucksMenuItem(id: 12, name: "Salad", imageName: "salad", price: 6000),
-        SpabucksMenuItem(id: 13, name: "Scorn", imageName: "scorn", price: 5500)]
+        SpabucksMenuItem(id: 0, name: "Croissant", imageName: "croissant", price: 5000),
+        SpabucksMenuItem(id: 1, name: "Sandwich", imageName: "sandwich", price: 6000),
+        SpabucksMenuItem(id: 2, name: "Salad", imageName: "salad", price: 6000),
+        SpabucksMenuItem(id: 3, name: "Scorn", imageName: "scorn", price: 5500)]
     
     var merchandiserItems: [SpabucksMenuItem] = [
-        SpabucksMenuItem(id: 20, name: "Tumbler", imageName: "Tumbler", price: 5500),
-        SpabucksMenuItem(id: 21, name: "Pen", imageName: "Pen", price: 1500),
-        SpabucksMenuItem(id: 22, name: "Notebook", imageName: "Notebook", price: 12500),
-        SpabucksMenuItem(id: 23, name: "Tent", imageName: "Tent", price: 25000)]
+        SpabucksMenuItem(id: 0, name: "Tumbler", imageName: "Tumbler", price: 5500),
+        SpabucksMenuItem(id: 1, name: "Pen", imageName: "Pen", price: 1500),
+        SpabucksMenuItem(id: 2, name: "Notebook", imageName: "Notebook", price: 12500),
+        SpabucksMenuItem(id: 3, name: "Tent", imageName: "Tent", price: 25000)]
     
     // MARK: - UI Properties
     
