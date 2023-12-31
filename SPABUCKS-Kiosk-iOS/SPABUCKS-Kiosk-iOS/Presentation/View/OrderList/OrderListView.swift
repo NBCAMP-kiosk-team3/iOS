@@ -11,7 +11,7 @@ class OrderListView: UIView, MenuDataDelegate {
     
     // MARK: - Properties
     
-    var orderList: [SpabucksOrderItem] = [] 
+    var orderList: [SpabucksOrderItem] = []
     
     // MARK: - UI Properties
     
@@ -68,16 +68,32 @@ class OrderListView: UIView, MenuDataDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: MenuDataDelegate setting
-    
-    func didSelectMenuItem(_ item: SpabucksMenuItem) {
-        setOrderItem(item)
-        updateOrderListTable()
-    }
+    // MARK: Data Setting
     
     private func setOrderItem(_ item: SpabucksMenuItem) {
-        let orderItemData = SpabucksOrderItem(menuItem: item)
-        orderList.append(orderItemData)
+        var duplicateCheck = false
+        var duplicateIndex: Int?
+        
+        for i in 0 ..< orderList.count {
+            if(orderList[i].menuItem.name == item.name) {
+                duplicateIndex = orderList.indices.filter({orderList[$0].menuItem.id == orderList[i].menuItem.id}).first
+                duplicateCheck = true
+                
+                break
+            }
+        }
+
+        if duplicateCheck == true {
+            orderList[duplicateIndex!].orderCount += 1
+            orderListTable.reloadRows(at: [IndexPath(row: duplicateIndex!, section: 0)], with: .automatic)
+            
+            setTotalOrderInfo()
+        } else {
+            let orderItemData = SpabucksOrderItem(menuItem: item)
+            orderList.append(orderItemData)
+            
+            updateOrderListTable()
+        }
     }
     
     private func updateOrderListTable() {
@@ -87,6 +103,11 @@ class OrderListView: UIView, MenuDataDelegate {
         setTotalOrderInfo()
     }
     
+    // MARK: MenuDataDelegate
+    
+    func didSelectMenuItem(_ item: SpabucksMenuItem) {
+        setOrderItem(item)
+    }
 }
 
 // MARK: - Extensions
@@ -203,12 +224,10 @@ extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     private func updateOrderCount(at indexPath: IndexPath, delta: Int) {
-        var customIndexPath = IndexPath()
+        var customIndexPath = IndexPath(row: self.orderList.count-1, section: 0)
         
         if indexPath.row < orderList.count {
             customIndexPath = indexPath
-        } else {
-            customIndexPath = IndexPath(row: self.orderList.count-1, section: 0)
         }
         
         var orderItem = orderList[customIndexPath.row]
@@ -223,8 +242,14 @@ extension OrderListView: UITableViewDataSource, UITableViewDelegate {
     }
     
     private func deleteOrder(at indexPath: IndexPath) {
-        orderList.remove(at: indexPath.row)
+        if orderList.count == 1 {
+            orderList.removeAll()
+            orderListTable.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        } else {
+            orderList.remove(at: indexPath.row)
+            orderListTable.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
         setTotalOrderInfo()
-        orderListTable.deleteRows(at: [indexPath], with: .none)
     }
 }
