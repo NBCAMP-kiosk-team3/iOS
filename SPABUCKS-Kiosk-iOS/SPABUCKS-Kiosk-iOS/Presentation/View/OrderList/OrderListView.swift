@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol OrderListViewDelegate: AnyObject {
+    func didTapCallEmployeeButton()
+    func didTapCancelButton()
+    func didTapPaymentButton()
+}
+
 final class OrderListView: UIView, MenuDataDelegate {
     
     // MARK: - Properties
+    
+    weak var delegate: OrderListViewDelegate?
     
     var orderList: [SpabucksOrderItem] = []
     
@@ -36,20 +44,20 @@ final class OrderListView: UIView, MenuDataDelegate {
         return label
     }()
     
-    let cancelButton: ColorButton = {
+    private let cancelButton: ColorButton = {
         let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
         return button
     }()
     
-    let paymentButton: ColorButton = {
+    private let paymentButton: ColorButton = {
         let button = ColorButton(title: "결제하기", color: UIColor.systemPink)
         
         return button
     }()
     
-    let callEmployeeButton: ColorButton = {
+    private let callEmployeeButton: ColorButton = {
         let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
@@ -69,6 +77,7 @@ final class OrderListView: UIView, MenuDataDelegate {
         super.init(frame: frame)
         
         setUI()
+        setupButtonTargets()
     }
     
     required init?(coder: NSCoder) {
@@ -146,6 +155,12 @@ extension OrderListView {
         ])
     }
     
+    private func setupButtonTargets() {
+        callEmployeeButton.addTarget(self, action: #selector(handleCallEmployeeButton), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
+        paymentButton.addTarget(self, action: #selector(handlePaymentButton), for: .touchUpInside)
+    }
+    
     private func createOrderPriceInfo() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -184,6 +199,20 @@ extension OrderListView {
         orderListTable.rowHeight = 100.0
         
         return orderListTable
+    }
+    
+    // MARK: - ActionHelpers
+    
+    @objc private func handleCallEmployeeButton() {
+        delegate?.didTapCallEmployeeButton()
+    }
+
+    @objc private func handleCancelButton() {
+        delegate?.didTapCancelButton()
+    }
+
+    @objc private func handlePaymentButton() {
+        delegate?.didTapPaymentButton()
     }
 }
 

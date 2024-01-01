@@ -11,7 +11,7 @@ final class HeaderView: UIView {
     
     // MARK: - UI Properties
     
-    let spabucksNameLabel: UILabel = {
+    private let spabucksNameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .systemPink
         label.text = "SPABUCKS"
