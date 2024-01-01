@@ -7,25 +7,19 @@
 
 import UIKit
 
-class OrderListView: UIView {
+class OrderListView: UIView, MenuDataDelegate {
     
     // MARK: - Properties
     
-    var tempOrderList: [SpabucksOrderItem] = [
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano", price: 5.7)),
-        SpabucksOrderItem(menuItem: SpabucksMenuItem(id: 1, name: "Caramel Macchiato", imageName: "caramel_macchiato", price: 5.9), orderCount: 3)
-    ]
+    var orderList: [SpabucksOrderItem] = []
     
     // MARK: - UI Properties
     
-    let countLabel: UILabel = {
-        let label = UILabel()
-        label.text = "4개"
-        
-        return label
-    }()
+    private let orderListTable = UITableView()
     
-    let priceTitleLabel: UILabel = {
+    private let countLabel = UILabel()
+    
+    private let priceTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "총 주문 가격"
         label.textAlignment = .right
@@ -33,9 +27,8 @@ class OrderListView: UIView {
         return label
     }()
     
-    let priceLabel: UILabel = {
+    private let priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "20,000원"
         label.font = UIFont.boldSystemFont(ofSize: 20).withSize(20.0)
         label.textColor = .systemPink
         label.textAlignment = .right
@@ -43,20 +36,20 @@ class OrderListView: UIView {
         return label
     }()
     
-    let cancelButton: ColorButton = {
+    private let cancelButton: ColorButton = {
         let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
         return button
     }()
     
-    let paymentButton: ColorButton = {
+    private let paymentButton: ColorButton = {
         let button = ColorButton(title: "결제하기", color: UIColor.systemPink)
         
         return button
     }()
     
-    let callEmployeeButton: ColorButton = {
+    private let callEmployeeButton: ColorButton = {
         let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
@@ -75,9 +68,45 @@ class OrderListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func getOrderItem(_ item: SpabucksMenuItem) {
-        let orderItem = SpabucksOrderItem(menuItem: item)
-        tempOrderList.append(orderItem)
+    // MARK: Data Setting
+    
+    private func setOrderItem(_ item: SpabucksMenuItem) {
+        var duplicateCheck = false
+        var duplicateIndex: Int?
+        
+        for i in 0 ..< orderList.count {
+            if(orderList[i].menuItem.name == item.name) {
+                duplicateIndex = orderList.indices.filter({"\(orderList[$0].menuItem.name)-\(orderList[$0].menuItem.id)" == "\(orderList[i].menuItem.name)-\(orderList[i].menuItem.id)"}).first
+                duplicateCheck = true
+                
+                break
+            }
+        }
+
+        if duplicateCheck == true {
+            orderList[duplicateIndex!].orderCount += 1
+            orderListTable.reloadRows(at: [IndexPath(row: duplicateIndex!, section: 0)], with: .automatic)
+            
+            setTotalOrderInfo()
+        } else {
+            let orderItemData = SpabucksOrderItem(menuItem: item)
+            orderList.append(orderItemData)
+            
+            updateOrderListTable()
+        }
+    }
+    
+    private func updateOrderListTable() {
+        let indexPath = IndexPath(row: self.orderList.count-1, section: 0)
+        orderListTable.insertRows(at: [indexPath], with: .automatic)
+        
+        setTotalOrderInfo()
+    }
+    
+    // MARK: MenuDataDelegate
+    
+    func didSelectMenuItem(_ item: SpabucksMenuItem) {
+        setOrderItem(item)
     }
 }
 
@@ -87,6 +116,8 @@ extension OrderListView {
     private func setUI() {
         backgroundColor = .systemGray6
         heightAnchor.constraint(equalToConstant: 317 + 45).isActive = true
+        
+        setTotalOrderInfo()
         
         let verticalStackView = UIStackView()
         verticalStackView.axis = .vertical
@@ -138,33 +169,87 @@ extension OrderListView {
     }
     
     private func createTableView() -> UITableView {
-        let tableView = UITableView()
-        tableView.backgroundColor = .white
+        orderListTable.dataSource = self
+        orderListTable.delegate = self
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
-        tableView.rowHeight = 100.0
+        orderListTable.backgroundColor = .white
+        orderListTable.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
+        orderListTable.rowHeight = 100.0
         
-        return tableView
+        return orderListTable
     }
 }
 
 extension OrderListView: UITableViewDataSource, UITableViewDelegate {
+    func setTotalOrderInfo() {
+        let orderListCount = orderList.count
+        var totalPrice: Double = 0
+        var totalCount: Int = 0
+        
+        for i in 0 ..< orderListCount {
+            totalPrice += orderList[i].menuItem.price * Double(orderList[i].orderCount)
+            totalCount += orderList[i].orderCount
+        }
+        
+        countLabel.text = "\(totalCount) 개"
+        priceLabel.text = "\(totalPrice.formattedString())원"
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tempOrderList.count
+        return orderList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         cell.selectionStyle = .none
         
-        cell.itemImageView.image = UIImage(named: tempOrderList[indexPath.row].menuItem.imageName)
-        cell.itemNameLabel.text = tempOrderList[indexPath.row].menuItem.name
-        cell.itemPriceLabel.text = "\(tempOrderList[indexPath.row].menuItem.price) 원"
-        cell.quantityLabel.text = String(tempOrderList[indexPath.row].orderCount)
+        cell.onMinusButton = { [weak self] in
+            self?.updateOrderCount(at: indexPath, delta: -1)
+        }
+        
+        cell.onPlusButton = { [weak self] in
+            self?.updateOrderCount(at: indexPath, delta: 1)
+        }
+        
+        cell.onDeleteButton = { [weak self] in
+            self?.deleteOrder(at: indexPath)
+        }
+        
+        cell.itemImageView.image = UIImage(named: orderList[indexPath.row].menuItem.imageName)
+        cell.itemNameLabel.text = orderList[indexPath.row].menuItem.name
+        cell.itemPriceLabel.text = "\((self.orderList[indexPath.row].menuItem.price * Double(self.orderList[indexPath.row].orderCount)).formattedString()) 원"
+        cell.quantityLabel.text = String(self.orderList[indexPath.row].orderCount)
         
         return cell
+    }
+    
+    private func updateOrderCount(at indexPath: IndexPath, delta: Int) {
+        var customIndexPath = IndexPath(row: self.orderList.count-1, section: 0)
+        
+        if indexPath.row < orderList.count {
+            customIndexPath = indexPath
+        }
+        
+        var orderItem = orderList[customIndexPath.row]
+        orderItem.orderCount += delta
+        
+        if orderItem.orderCount > 0 {
+            orderList[customIndexPath.row] = orderItem
+            
+            setTotalOrderInfo()
+            orderListTable.reloadRows(at: [customIndexPath], with: .none)
+        }
+    }
+    
+    private func deleteOrder(at indexPath: IndexPath) {
+        if orderList.count == 1 {
+            orderList.removeAll()
+            orderListTable.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        } else {
+            orderList.remove(at: indexPath.row)
+            orderListTable.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
+        setTotalOrderInfo()
     }
 }

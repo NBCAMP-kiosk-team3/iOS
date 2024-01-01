@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        setDelegate()
         setUI()
         setLayout()
         setupButtonTargets()
@@ -98,6 +99,10 @@ extension ViewController {
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func setDelegate() {
+        menuView.delegate = orderView
     }
     
     private func setupButtonTargets() {
