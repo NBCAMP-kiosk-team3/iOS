@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderListView: UIView, MenuDataDelegate {
+final class OrderListView: UIView, MenuDataDelegate {
     
     // MARK: - Properties
     

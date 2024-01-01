@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class MenuView: UIView {
+final class MenuView: UIView {
     
     weak var delegate: MenuDataDelegate?
     

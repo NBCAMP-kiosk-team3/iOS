@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MenuCell: UICollectionViewCell {
+final class MenuCell: UICollectionViewCell {
     
     // MARK: - Properties
     

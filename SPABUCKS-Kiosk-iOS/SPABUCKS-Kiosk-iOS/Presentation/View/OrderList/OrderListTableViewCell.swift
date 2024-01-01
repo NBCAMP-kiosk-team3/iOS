@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderListTableViewCell: UITableViewCell {
+final class OrderListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
