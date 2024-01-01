@@ -174,5 +174,4 @@ extension OrderListTableViewCell {
             deleteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
-    
 }
