@@ -94,9 +94,9 @@ extension MenuView: UICollectionViewDataSource {
             
             return UICollectionViewCell()
         }
-        cell.imageView.image = UIImage(named: dataSource[indexPath.row].imageName)
-        cell.nameLabel.text = dataSource[indexPath.row].name
-        cell.priceLabel.text = String("\(Int(dataSource[indexPath.row].price)) 원")
+        
+        let menuItem = dataSource[indexPath.row]
+        cell.configure(with: menuItem)
         
         return cell
     }
