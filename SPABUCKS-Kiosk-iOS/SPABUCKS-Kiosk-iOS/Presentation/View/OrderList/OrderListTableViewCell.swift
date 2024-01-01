@@ -19,23 +19,23 @@ final class OrderListTableViewCell: UITableViewCell {
     
     // MARK: - UI Properties
     
-    let itemImageView: UIImageView = {
+    private let itemImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
     
-    let itemNameLabel = UILabel()
+    private let itemNameLabel = UILabel()
     
-    let itemPriceLabel: UILabel = {
+    private let itemPriceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
         
         return label
     }()
     
-    let quantityLabel = UILabel()
+    private let quantityLabel = UILabel()
     
     private let minusButton: ColorButton = {
         let button = ColorButton(title: "-", color: UIColor.systemGray5)
@@ -173,5 +173,15 @@ extension OrderListTableViewCell {
             deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             deleteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
+    }
+    
+    // MARK: - Action Helper
+    
+    func configure(with item: SpabucksOrderItem) {
+        // 데이터를 받아와 UI 프로퍼티에 설정하는 작업 수행
+        itemImageView.image = UIImage(named: item.menuItem.imageName)
+        itemNameLabel.text = item.menuItem.name
+        itemPriceLabel.text = "\((item.menuItem.price * Double(item.orderCount)).formattedString()) 원"
+        quantityLabel.text = String(item.orderCount)
     }
 }

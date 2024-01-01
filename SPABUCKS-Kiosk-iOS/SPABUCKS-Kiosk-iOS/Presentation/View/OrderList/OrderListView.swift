@@ -168,7 +168,7 @@ extension OrderListView {
         delegate?.didTapPaymentButton()
     }
     
-    // MARK: Data Setting
+    // MARK: - Data Setting
     
     private func setOrderItem(_ item: SpabucksMenuItem) {
         var duplicateCheck = false
@@ -242,10 +242,8 @@ extension OrderListView: UITableViewDelegate {
             self?.deleteOrder(at: indexPath)
         }
         
-        cell.itemImageView.image = UIImage(named: orderList[indexPath.row].menuItem.imageName)
-        cell.itemNameLabel.text = orderList[indexPath.row].menuItem.name
-        cell.itemPriceLabel.text = "\((self.orderList[indexPath.row].menuItem.price * Double(self.orderList[indexPath.row].orderCount)).formattedString()) 원"
-        cell.quantityLabel.text = String(self.orderList[indexPath.row].orderCount)
+        let orderItem = orderList[indexPath.row]
+        cell.configure(with: orderItem)
         
         return cell
     }
