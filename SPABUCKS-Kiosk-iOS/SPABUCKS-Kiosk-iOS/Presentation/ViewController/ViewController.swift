@@ -58,6 +58,9 @@ extension ViewController {
     private func setUI() {
         view.backgroundColor = .white
         
+        headerView.beverageMenuButton.backgroundColor = .white
+        menuView.showBeverageView()
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
         menuView.translatesAutoresizingMaskIntoConstraints = false
