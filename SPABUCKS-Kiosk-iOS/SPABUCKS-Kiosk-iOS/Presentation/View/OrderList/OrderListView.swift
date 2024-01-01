@@ -58,7 +58,7 @@ class OrderListView: UIView, MenuDataDelegate {
     
     func orderListRemoveAll() {
         orderList.removeAll()
-        orderListTable.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        orderListTable.reloadData()
         
         setTotalOrderInfo()
     }
