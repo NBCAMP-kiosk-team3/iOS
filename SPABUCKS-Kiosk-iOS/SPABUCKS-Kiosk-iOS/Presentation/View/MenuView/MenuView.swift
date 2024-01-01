@@ -12,6 +12,8 @@ class MenuView: UIView {
     
     // MARK: - Properties
     
+    private let orderView =  OrderListView()
+    
     var dataSource: [SpabucksMenuItem] = []
     var drinkItems: [SpabucksMenuItem] = [
         SpabucksMenuItem(id: 0, name: "Caffè Americano", imageName: "americano", price: 5700),
@@ -70,11 +72,8 @@ extension MenuView {
 
 extension MenuView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: 셀 선택 시 처리할 내용 (getOrderItem 사용해보시면 될 것 같습니다)
         let selectedData = dataSource[indexPath.row] // 선택된 셀의 데이터
         delegate?.didSelectMenuItem(selectedData)
-        collectionView.deselectItem(at: indexPath, animated: true)
-        
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
