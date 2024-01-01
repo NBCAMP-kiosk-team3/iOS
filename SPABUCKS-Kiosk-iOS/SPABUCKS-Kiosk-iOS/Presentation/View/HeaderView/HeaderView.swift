@@ -111,11 +111,15 @@ extension HeaderView {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        stackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        
-        self.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+        ])
+        
         stackView.addArrangedSubview(beverageMenuButton)
         stackView.addArrangedSubview(foodMenuButton)
         stackView.addArrangedSubview(mdMenuButton)
