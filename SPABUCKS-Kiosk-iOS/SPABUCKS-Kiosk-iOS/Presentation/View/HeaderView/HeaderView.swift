@@ -15,8 +15,8 @@ class HeaderView: UIView {
         let label = UILabel()
         label.backgroundColor = .systemPink
         label.text = "SPABUCKS"
+        label.font = UIFont(name: "BlackHanSans-Regular", size: 30)
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
         
         return label
@@ -111,11 +111,15 @@ extension HeaderView {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.alignment = .center
-        stackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        
-        self.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+        ])
+        
         stackView.addArrangedSubview(beverageMenuButton)
         stackView.addArrangedSubview(foodMenuButton)
         stackView.addArrangedSubview(mdMenuButton)

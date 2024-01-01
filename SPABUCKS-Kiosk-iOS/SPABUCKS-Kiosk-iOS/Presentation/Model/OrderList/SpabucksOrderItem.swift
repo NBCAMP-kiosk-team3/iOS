@@ -20,3 +20,7 @@ struct SpabucksOrderItem {
         self.orderCount = orderCount
     }
 }
+
+protocol MenuDataDelegate: AnyObject {
+    func didSelectMenuItem(_ item: SpabucksMenuItem)
+}

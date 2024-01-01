@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        setDelegate()
         setUI()
         setLayout()
         setupButtonTargets()
@@ -33,6 +34,7 @@ class ViewController: UIViewController {
 // MARK: - Extensions
 
 extension ViewController {
+    
     @objc private func tapBeverageButton() {
         headerView.mdMenuButton.backgroundColor = .clear
         headerView.foodMenuButton.backgroundColor = .clear
@@ -53,9 +55,36 @@ extension ViewController {
         headerView.mdMenuButton.backgroundColor = .white
         menuView.showMdMenuView()
     }
+   
+    @objc private func tapCallEmployeeButton() {
+        actionAlert(in: self, title: "직원을 호출하였습니다.", message: "잠시만 기다려주세요.", cancelButton: false)
+    }
+    
+    @objc private func tapCancelButton() {
+        if orderView.orderList.count != 0 {
+            actionAlert(in: self, title: "주문 취소", message: "추가한 메뉴를 모두 삭제하시겠습니까?") {
+                self.orderView.orderListRemoveAll()
+                actionAlert(in: self, title: "전체 삭제되었습니다.", message: "주문을 다시 진행해주세요", cancelButton: false)
+            }
+        }
+    }
+    
+    @objc private func tapPaymentButton() {
+        if orderView.orderList.count != 0 {
+            actionAlert(in: self, title: "결제하기", message: "결제하시겠습니까?") {
+                self.orderView.orderListRemoveAll()
+                actionAlert(in: self, title: "결제가 완료되었습니다.", message: "", cancelButton: false)
+            }
+        } else {
+            actionAlert(in: self, title: "선택된 상품이 없습니다.", message: "주문할 상품을 선택해주세요.", cancelButton: false)
+        }
+    }
     
     private func setUI() {
         view.backgroundColor = .white
+        
+        headerView.beverageMenuButton.backgroundColor = .white
+        menuView.showBeverageView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         headerView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,10 +103,17 @@ extension ViewController {
         ])
     }
     
+    private func setDelegate() {
+        menuView.delegate = orderView
+    }
+    
     private func setupButtonTargets() {
         headerView.beverageMenuButton.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
         headerView.foodMenuButton.addTarget(self, action: #selector(tapFoodButton), for: .touchUpInside)
         headerView.mdMenuButton.addTarget(self, action: #selector(tapMDButton), for: .touchUpInside)
+        orderView.callEmployeeButton.addTarget(self, action: #selector(tapCallEmployeeButton), for: .touchUpInside)
+        orderView.cancelButton.addTarget(self, action: #selector(tapCancelButton), for: .touchUpInside)
+        orderView.paymentButton.addTarget(self, action: #selector(tapPaymentButton), for: .touchUpInside)
     }
     
     private func createStackView() -> UIStackView {

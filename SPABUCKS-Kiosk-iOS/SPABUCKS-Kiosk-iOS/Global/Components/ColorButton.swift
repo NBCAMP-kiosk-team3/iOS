@@ -8,7 +8,7 @@
 import UIKit
 
 final class ColorButton: UIButton {
-    
+
     init(title: String, color: UIColor) {
         super.init(frame: .zero)
         

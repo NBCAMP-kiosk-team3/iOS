@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1B4089EC2B3D6D6600796E95 /* SpabucksOrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4089EB2B3D6D6600796E95 /* SpabucksOrderItem.swift */; };
 		1B4089EE2B3D6DBE00796E95 /* OrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4089ED2B3D6DBE00796E95 /* OrderListTableViewCell.swift */; };
+		1B52416A2B3EAB6C00342185 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5241692B3EAB6C00342185 /* Double+Extension.swift */; };
+		1B52416E2B42BBDD00342185 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B52416D2B42BBDD00342185 /* Alert.swift */; };
 		37E112182B3AB8FC003740CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112172B3AB8FC003740CF /* AppDelegate.swift */; };
 		37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112192B3AB8FC003740CF /* SceneDelegate.swift */; };
 		37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1121B2B3AB8FC003740CF /* ViewController.swift */; };
@@ -20,6 +22,7 @@
 		37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112362B3ABBE2003740CF /* HeaderView.swift */; };
 		37E112392B3ABD99003740CF /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E112382B3ABD99003740CF /* MenuView.swift */; };
 		37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1123A2B3ABDB9003740CF /* OrderListView.swift */; };
+		73868C6D2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73868C6C2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf */; };
 		C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */; };
 		C811ACE42B3D461700E065AC /* Eatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE32B3D461700E065AC /* Eatable.swift */; };
 		C811ACE82B3D716C00E065AC /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE72B3D716C00E065AC /* MenuCell.swift */; };
@@ -28,6 +31,8 @@
 /* Begin PBXFileReference section */
 		1B4089EB2B3D6D6600796E95 /* SpabucksOrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpabucksOrderItem.swift; sourceTree = "<group>"; };
 		1B4089ED2B3D6DBE00796E95 /* OrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListTableViewCell.swift; sourceTree = "<group>"; };
+		1B5241692B3EAB6C00342185 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		1B52416D2B42BBDD00342185 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		37E112142B3AB8FC003740CF /* SPABUCKS-Kiosk-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SPABUCKS-Kiosk-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E112172B3AB8FC003740CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37E112192B3AB8FC003740CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +46,7 @@
 		37E112362B3ABBE2003740CF /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		37E112382B3ABD99003740CF /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		37E1123A2B3ABDB9003740CF /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
+		73868C6C2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpabucksMenuItem.swift; sourceTree = "<group>"; };
 		C811ACE32B3D461700E065AC /* Eatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eatable.swift; sourceTree = "<group>"; };
 		C811ACE72B3D716C00E065AC /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
@@ -129,6 +135,7 @@
 		37E1122B2B3AB950003740CF /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				73868C6B2B3E90C6006CF5C7 /* Font */,
 				37E1122F2B3ABA2F003740CF /* Extensions */,
 				37E1122E2B3AB9E3003740CF /* Components */,
 				37E1122C2B3AB957003740CF /* Supports */,
@@ -162,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				37E112322B3ABB3A003740CF /* ColorButton.swift */,
+				1B52416D2B42BBDD00342185 /* Alert.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -170,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				37E112302B3ABA46003740CF /* UIViewController+Extension.swift */,
+				1B5241692B3EAB6C00342185 /* Double+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -190,6 +199,14 @@
 				37E1121B2B3AB8FC003740CF /* ViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		73868C6B2B3E90C6006CF5C7 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				73868C6C2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		C811ACE52B3D5EB000E065AC /* MenuView */ = {
@@ -259,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73868C6D2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf in Resources */,
 				37E112242B3AB8FE003740CF /* LaunchScreen.storyboard in Resources */,
 				37E112212B3AB8FE003740CF /* Assets.xcassets in Resources */,
 				37E1121F2B3AB8FC003740CF /* Main.storyboard in Resources */,
@@ -274,6 +292,8 @@
 			files = (
 				37E112392B3ABD99003740CF /* MenuView.swift in Sources */,
 				37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */,
+				1B52416A2B3EAB6C00342185 /* Double+Extension.swift in Sources */,
+				1B52416E2B42BBDD00342185 /* Alert.swift in Sources */,
 				37E112312B3ABA46003740CF /* UIViewController+Extension.swift in Sources */,
 				37E1121C2B3AB8FC003740CF /* ViewController.swift in Sources */,
 				37E112372B3ABBE2003740CF /* HeaderView.swift in Sources */,
