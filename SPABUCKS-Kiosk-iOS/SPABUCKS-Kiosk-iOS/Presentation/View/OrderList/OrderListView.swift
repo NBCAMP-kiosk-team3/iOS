@@ -36,20 +36,20 @@ class OrderListView: UIView, MenuDataDelegate {
         return label
     }()
     
-    private let cancelButton: ColorButton = {
+    let cancelButton: ColorButton = {
         let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
         return button
     }()
     
-    private let paymentButton: ColorButton = {
+    let paymentButton: ColorButton = {
         let button = ColorButton(title: "결제하기", color: UIColor.systemPink)
         
         return button
     }()
     
-    private let callEmployeeButton: ColorButton = {
+    let callEmployeeButton: ColorButton = {
         let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
