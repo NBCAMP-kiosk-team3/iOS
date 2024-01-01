@@ -6,13 +6,13 @@
 //
 import UIKit
 
+// MARK: - MenuView
+
 final class MenuView: UIView {
     
     weak var delegate: MenuDataDelegate?
     
     // MARK: - Properties
-    
-    private let orderView =  OrderListView()
     
     var dataSource: [SpabucksMenuItem] = []
     var drinkItems: [SpabucksMenuItem] = [
@@ -37,6 +37,8 @@ final class MenuView: UIView {
     
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
+    private let orderView = OrderListView()
+    
     // MARK: - Life Cycle
     
     override init(frame: CGRect) {
@@ -57,6 +59,7 @@ extension MenuView {
         dataSource = drinkItems
         collectionView.reloadData()
     }
+    
     func showFoodMenuView() {
         dataSource = foodItems
         collectionView.reloadData()

@@ -7,7 +7,19 @@
 
 import UIKit
 
+protocol HeaderViewDelegate: AnyObject {
+    func didTapBeverageButton()
+    func didTapFoodButton()
+    func didTapMDButton()
+}
+
+// MARK: - HeaderView
+
 final class HeaderView: UIView {
+    
+    // MARK: - Properties
+    
+    weak var delegate: HeaderViewDelegate?
     
     // MARK: - UI Properties
     
@@ -22,7 +34,7 @@ final class HeaderView: UIView {
         return label
     }()
     
-    let beverageMenuButton: UIButton = {
+    private let beverageMenuButton: UIButton = {
         let button = UIButton()
         button.setTitle("음료", for: .normal)
         button.frame.size.width = 100
@@ -36,7 +48,7 @@ final class HeaderView: UIView {
         return button
     }()
     
-    let foodMenuButton: UIButton = {
+    private let foodMenuButton: UIButton = {
         let button = UIButton()
         button.setTitle("푸드", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -50,7 +62,7 @@ final class HeaderView: UIView {
         return button
     }()
     
-    let mdMenuButton: UIButton = {
+    private let mdMenuButton: UIButton = {
         let button = UIButton()
         button.setTitle("상품", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -68,6 +80,7 @@ final class HeaderView: UIView {
         super.init(frame: frame)
         
         setUI()
+        setupButtonTargets()
     }
     
     required init?(coder: NSCoder) {
@@ -104,6 +117,12 @@ extension HeaderView {
         ])
     }
     
+    private func setupButtonTargets() {
+        beverageMenuButton.addTarget(self, action: #selector(didTapBeverageButton), for: .touchUpInside)
+        foodMenuButton.addTarget(self, action: #selector(didTapFoodButton), for: .touchUpInside)
+        mdMenuButton.addTarget(self, action: #selector(didTapMdButton), for: .touchUpInside)
+    }
+    
     private func makeCategory() -> UIStackView {
         self.backgroundColor = .systemGray6
         
@@ -127,4 +146,38 @@ extension HeaderView {
         return stackView
     }
     
+    // MARK: - Action Helpers
+    
+    @objc func didTapBeverageButton() {
+        delegate?.didTapBeverageButton()
+        
+    }
+    
+    @objc func didTapFoodButton() {
+        delegate?.didTapFoodButton()
+        
+    }
+    
+    @objc func didTapMdButton() {
+        delegate?.didTapMDButton()
+        
+    }
+    
+    func highlightBeverageButton() {
+        mdMenuButton.backgroundColor = .clear
+        foodMenuButton.backgroundColor = .clear
+        beverageMenuButton.backgroundColor = .white
+    }
+    
+    func highlightFoodButton() {
+        mdMenuButton.backgroundColor = .clear
+        beverageMenuButton.backgroundColor = .clear
+        foodMenuButton.backgroundColor = .white
+    }
+    
+    func highlightMdButton() {
+        beverageMenuButton.backgroundColor = .clear
+        foodMenuButton.backgroundColor = .clear
+        mdMenuButton.backgroundColor = .white
+    }
 }

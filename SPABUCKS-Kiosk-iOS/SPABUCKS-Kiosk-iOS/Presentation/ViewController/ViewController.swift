@@ -9,8 +9,6 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    // MARK: - Properties
-    
     // MARK: - UI Properties
     
     private lazy var stackView: UIStackView = { createStackView() }()
@@ -24,10 +22,9 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setDelegate()
         setUI()
         setLayout()
-        setupButtonTargets()
+        setDelegate()
     }
 }
 
@@ -35,31 +32,10 @@ final class ViewController: UIViewController {
 
 extension ViewController {
     
-    @objc private func tapBeverageButton() {
-        headerView.mdMenuButton.backgroundColor = .clear
-        headerView.foodMenuButton.backgroundColor = .clear
-        headerView.beverageMenuButton.backgroundColor = .white
-        menuView.showBeverageView()
-    }
-    
-    @objc private func tapFoodButton() {
-        headerView.mdMenuButton.backgroundColor = .clear
-        headerView.beverageMenuButton.backgroundColor = .clear
-        headerView.foodMenuButton.backgroundColor = .white
-        menuView.showFoodMenuView()
-    }
-    
-    @objc private func tapMDButton() {
-        headerView.beverageMenuButton.backgroundColor = .clear
-        headerView.foodMenuButton.backgroundColor = .clear
-        headerView.mdMenuButton.backgroundColor = .white
-        menuView.showMdMenuView()
-    }
-    
     private func setUI() {
         view.backgroundColor = .white
         
-        headerView.beverageMenuButton.backgroundColor = .white
+        headerView.highlightBeverageButton()
         menuView.showBeverageView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,15 +57,7 @@ extension ViewController {
     
     private func setDelegate() {
         menuView.delegate = orderView
-    }
-    
-    private func setupButtonTargets() {
-        headerView.beverageMenuButton.addTarget(self, action: #selector(tapBeverageButton), for: .touchUpInside)
-        headerView.foodMenuButton.addTarget(self, action: #selector(tapFoodButton), for: .touchUpInside)
-        headerView.mdMenuButton.addTarget(self, action: #selector(tapMDButton), for: .touchUpInside)
-        orderView.callEmployeeButton.addTarget(self, action: #selector(didTapCallEmployeeButton), for: .touchUpInside)
-        orderView.cancelButton.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
-        orderView.paymentButton.addTarget(self, action: #selector(didTapPaymentButton), for: .touchUpInside)
+        headerView.delegate = self
     }
     
     private func createStackView() -> UIStackView {
@@ -105,7 +73,26 @@ extension ViewController {
     }
 }
 
-// MARK: - OrderListViewDelegate 
+// MARK: - HeaderViewDelegate
+
+extension ViewController: HeaderViewDelegate {
+    func didTapBeverageButton() {
+        headerView.highlightBeverageButton()
+        menuView.showBeverageView()
+    }
+    
+    func didTapFoodButton() {
+        headerView.highlightFoodButton()
+        menuView.showFoodMenuView()
+    }
+    
+    func didTapMDButton() {
+        headerView.highlightMdButton()
+        menuView.showMdMenuView()
+    }
+}
+
+// MARK: - OrderListViewDelegate
 
 extension ViewController: OrderListViewDelegate {
     @objc func didTapCallEmployeeButton() {
