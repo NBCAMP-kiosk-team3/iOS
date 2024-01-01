@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol MenuDataDelegate: AnyObject {
+    func didSelectMenuItem(_ item: SpabucksMenuItem)
+}
+
 struct SpabucksOrderItem {
     var menuItem: SpabucksMenuItem
     var orderCount: Int
@@ -19,8 +23,4 @@ struct SpabucksOrderItem {
         self.menuItem = menuItem
         self.orderCount = orderCount
     }
-}
-
-protocol MenuDataDelegate: AnyObject {
-    func didSelectMenuItem(_ item: SpabucksMenuItem)
 }

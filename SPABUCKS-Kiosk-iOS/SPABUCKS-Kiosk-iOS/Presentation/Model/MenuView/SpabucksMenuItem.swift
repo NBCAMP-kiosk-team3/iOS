@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SpabucksMenuItem : Eatable {
+class SpabucksMenuItem {
     var id: Int
     var name: String
     var imageName: String
@@ -18,5 +18,11 @@ class SpabucksMenuItem : Eatable {
         self.name = name
         self.imageName = imageName
         self.price = price
+    }
+}
+
+extension SpabucksMenuItem {
+    func displayInfo() {
+        print("\(id)  | W \(name)  | \(price)")
     }
 }

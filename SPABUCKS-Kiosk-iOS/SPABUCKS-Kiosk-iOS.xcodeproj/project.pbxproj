@@ -24,7 +24,6 @@
 		37E1123B2B3ABDB9003740CF /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E1123A2B3ABDB9003740CF /* OrderListView.swift */; };
 		73868C6D2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73868C6C2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf */; };
 		C8095C962B3C12E600009E46 /* SpabucksMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */; };
-		C811ACE42B3D461700E065AC /* Eatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE32B3D461700E065AC /* Eatable.swift */; };
 		C811ACE82B3D716C00E065AC /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C811ACE72B3D716C00E065AC /* MenuCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +47,6 @@
 		37E1123A2B3ABDB9003740CF /* OrderListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListView.swift; sourceTree = "<group>"; };
 		73868C6C2B3E90DA006CF5C7 /* BlackHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BlackHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpabucksMenuItem.swift; sourceTree = "<group>"; };
-		C811ACE32B3D461700E065AC /* Eatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eatable.swift; sourceTree = "<group>"; };
 		C811ACE72B3D716C00E065AC /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				C8095C952B3C12E600009E46 /* SpabucksMenuItem.swift */,
-				C811ACE32B3D461700E065AC /* Eatable.swift */,
 			);
 			path = MenuView;
 			sourceTree = "<group>";
@@ -304,7 +301,6 @@
 				37E1121A2B3AB8FC003740CF /* SceneDelegate.swift in Sources */,
 				1B4089EC2B3D6D6600796E95 /* SpabucksOrderItem.swift in Sources */,
 				C811ACE82B3D716C00E065AC /* MenuCell.swift in Sources */,
-				C811ACE42B3D461700E065AC /* Eatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
