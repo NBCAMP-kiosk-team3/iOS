@@ -62,7 +62,7 @@ extension ViewController {
     
     @objc private func tapCancelButton() {
         if orderView.orderList.count != 0 {
-            actionAlert(in: self, title: "전체 삭제", message: "추가한 메뉴를 모두 삭제하시겠습니까?") {
+            actionAlert(in: self, title: "주문 취소", message: "추가한 메뉴를 모두 삭제하시겠습니까?") {
                 self.orderView.orderListRemoveAll()
                 actionAlert(in: self, title: "전체 삭제되었습니다.", message: "주문을 다시 진행해주세요", cancelButton: false)
             }
