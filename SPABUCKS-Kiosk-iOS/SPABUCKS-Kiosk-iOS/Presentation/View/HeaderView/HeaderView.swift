@@ -15,8 +15,8 @@ class HeaderView: UIView {
         let label = UILabel()
         label.backgroundColor = .systemPink
         label.text = "SPABUCKS"
+        label.font = UIFont(name: "BlackHanSans-Regular", size: 30)
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
         
         return label
@@ -107,15 +107,12 @@ extension HeaderView {
     private func makeCategory() -> UIStackView {
         self.backgroundColor = .systemGray6
         
-        let stackView: UIStackView = {
-            let stackView = UIStackView()
-            stackView.axis = .horizontal
-            stackView.distribution = .fillEqually
-            stackView.alignment = .center
-            stackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-            
-            return stackView
-        }()
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         
         self.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,5 +122,5 @@ extension HeaderView {
         
         return stackView
     }
-
+    
 }

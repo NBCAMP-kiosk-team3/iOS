@@ -31,12 +31,15 @@ class MenuView: UIView {
         SpabucksMenuItem(id: 2, name: "Notebook", imageName: "Notebook", price: 12500),
         SpabucksMenuItem(id: 3, name: "Tent", imageName: "Tent", price: 25000)]
     
-    // MARK: - Life Cycle
+    // MARK: - UI Properties
     
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
+    // MARK: - Life Cycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setUI()
     }
     
@@ -149,6 +152,3 @@ extension MenuView {
         ])
     }
 }
-
-
-
