@@ -56,6 +56,11 @@ class OrderListView: UIView, MenuDataDelegate {
         return button
     }()
     
+    func orderListRemoveAll() {
+        orderList.removeAll()
+        orderListTable.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+    }
+    
     // MARK: - Life Cycle
     
     override init(frame: CGRect) {
