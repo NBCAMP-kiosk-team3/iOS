@@ -56,8 +56,9 @@ extension ViewController {
     }
     
     private func setDelegate() {
-        menuView.delegate = orderView
         headerView.delegate = self
+        orderView.delegate = self
+        menuView.delegate = orderView
     }
     
     private func createStackView() -> UIStackView {
