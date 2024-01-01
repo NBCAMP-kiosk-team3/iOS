@@ -77,12 +77,12 @@ final class OrderListTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setUI()
+        setLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        setUI()
     }
     
     // MARK: Button Action Method
@@ -117,8 +117,12 @@ extension OrderListTableViewCell {
             contentView.addSubview($0)
         }
         
-        // MARK: Auto Layout
         
+    }
+    
+    // MARK: - Layout Helpers
+    
+    private func setLayout() {
         // itemImageView
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
