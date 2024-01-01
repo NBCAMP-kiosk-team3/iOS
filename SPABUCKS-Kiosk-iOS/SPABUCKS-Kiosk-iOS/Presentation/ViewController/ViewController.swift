@@ -55,27 +55,29 @@ extension ViewController {
         headerView.mdMenuButton.backgroundColor = .white
         menuView.showMdMenuView()
     }
-    
-    func alertAction(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "네", style: .default)
-        let cancel = UIAlertAction(title: "아니오", style: .destructive)
-        
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true)
-    }
-    
+   
     @objc private func tapCallEmployeeButton() {
-        alertAction(title: "직원 호출", message: "직원 도움이 필요하신가요?")
+        actionAlert(in: self, title: "직원을 호출하였습니다.", message: "잠시만 기다려주세요.", cancelButton: false)
     }
     
     @objc private func tapCancelButton() {
-        alertAction(title: "전체 삭제", message: "추가한 메뉴를 모두 삭제하시겠습니까?")
+        if orderView.orderList.count != 0 {
+            actionAlert(in: self, title: "주문 취소", message: "추가한 메뉴를 모두 삭제하시겠습니까?") {
+                self.orderView.orderListRemoveAll()
+                actionAlert(in: self, title: "전체 삭제되었습니다.", message: "주문을 다시 진행해주세요", cancelButton: false)
+            }
+        }
     }
     
     @objc private func tapPaymentButton() {
-        alertAction(title: "결제하기", message: "결제하시겠습니까?")
+        if orderView.orderList.count != 0 {
+            actionAlert(in: self, title: "결제하기", message: "결제하시겠습니까?") {
+                self.orderView.orderListRemoveAll()
+                actionAlert(in: self, title: "결제가 완료되었습니다.", message: "", cancelButton: false)
+            }
+        } else {
+            actionAlert(in: self, title: "선택된 상품이 없습니다.", message: "주문할 상품을 선택해주세요.", cancelButton: false)
+        }
     }
     
     private func setUI() {
