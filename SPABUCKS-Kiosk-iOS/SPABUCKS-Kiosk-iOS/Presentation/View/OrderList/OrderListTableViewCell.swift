@@ -60,19 +60,6 @@ final class OrderListTableViewCell: UITableViewCell {
     
     // MARK: - Life Cycle
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        itemImageView.image = nil
-        itemNameLabel.text = nil
-        itemPriceLabel.text = nil
-        quantityLabel.text = nil
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -83,20 +70,6 @@ final class OrderListTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-    }
-    
-    // MARK: Button Action Method
-    
-    @objc private func tapMinusButton() {
-        onMinusButton?()
-    }
-    
-    @objc private func tapPlusButton() {
-        onPlusButton?()
-    }
-    
-    @objc private func tapDeleteButton() {
-        onDeleteButton?()
     }
 }
 
@@ -181,8 +154,20 @@ extension OrderListTableViewCell {
     
     // MARK: - Action Helper
     
+    // MARK: Button Action
+    @objc private func tapMinusButton() {
+        onMinusButton?()
+    }
+    
+    @objc private func tapPlusButton() {
+        onPlusButton?()
+    }
+    
+    @objc private func tapDeleteButton() {
+        onDeleteButton?()
+    }
+    
     func configure(with item: SpabucksOrderItem) {
-        // 데이터를 받아와 UI 프로퍼티에 설정하는 작업 수행
         itemImageView.image = UIImage(named: item.menuItem.imageName)
         itemNameLabel.text = item.menuItem.name
         itemPriceLabel.text = "\((item.menuItem.price * Double(item.orderCount)).formattedString()) 원"
