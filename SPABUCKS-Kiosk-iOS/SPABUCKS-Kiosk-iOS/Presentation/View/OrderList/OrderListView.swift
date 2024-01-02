@@ -7,16 +7,25 @@
 
 import UIKit
 
-class OrderListView: UIView, MenuDataDelegate {
+protocol OrderListViewDelegate: AnyObject {
+    func didTapCallEmployeeButton()
+    func didTapCancelButton()
+    func didTapPaymentButton()
+}
+
+// MARK: - OrderListView
+
+final class OrderListView: UIView {
     
     // MARK: - Properties
+    
+    weak var delegate: OrderListViewDelegate?
     
     var orderList: [SpabucksOrderItem] = []
     
     // MARK: - UI Properties
     
     private let orderListTable = UITableView()
-    
     private let countLabel = UILabel()
     
     private let priceTitleLabel: UILabel = {
@@ -36,32 +45,25 @@ class OrderListView: UIView, MenuDataDelegate {
         return label
     }()
     
-    let cancelButton: ColorButton = {
+    private let cancelButton: ColorButton = {
         let button = ColorButton(title: "취소하기", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
         return button
     }()
     
-    let paymentButton: ColorButton = {
+    private let paymentButton: ColorButton = {
         let button = ColorButton(title: "결제하기", color: UIColor.systemPink)
         
         return button
     }()
     
-    let callEmployeeButton: ColorButton = {
+    private let callEmployeeButton: ColorButton = {
         let button = ColorButton(title: "직원호출", color: UIColor.systemGray4)
         button.setTitleColor(.black, for: .normal)
         
         return button
     }()
-    
-    func orderListRemoveAll() {
-        orderList.removeAll()
-        orderListTable.reloadData()
-        
-        setTotalOrderInfo()
-    }
     
     // MARK: - Life Cycle
     
@@ -69,51 +71,11 @@ class OrderListView: UIView, MenuDataDelegate {
         super.init(frame: frame)
         
         setUI()
+        setupButtonTargets()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: Data Setting
-    
-    private func setOrderItem(_ item: SpabucksMenuItem) {
-        var duplicateCheck = false
-        var duplicateIndex: Int?
-        
-        for i in 0 ..< orderList.count {
-            if(orderList[i].menuItem.name == item.name) {
-                duplicateIndex = orderList.indices.filter({"\(orderList[$0].menuItem.name)-\(orderList[$0].menuItem.id)" == "\(orderList[i].menuItem.name)-\(orderList[i].menuItem.id)"}).first
-                duplicateCheck = true
-                
-                break
-            }
-        }
-
-        if duplicateCheck == true {
-            orderList[duplicateIndex!].orderCount += 1
-            orderListTable.reloadRows(at: [IndexPath(row: duplicateIndex!, section: 0)], with: .automatic)
-            
-            setTotalOrderInfo()
-        } else {
-            let orderItemData = SpabucksOrderItem(menuItem: item)
-            orderList.append(orderItemData)
-            
-            updateOrderListTable()
-        }
-    }
-    
-    private func updateOrderListTable() {
-        let indexPath = IndexPath(row: self.orderList.count-1, section: 0)
-        orderListTable.insertRows(at: [indexPath], with: .automatic)
-        
-        setTotalOrderInfo()
-    }
-    
-    // MARK: MenuDataDelegate
-    
-    func didSelectMenuItem(_ item: SpabucksMenuItem) {
-        setOrderItem(item)
     }
 }
 
@@ -144,6 +106,12 @@ extension OrderListView {
             verticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
             verticalStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30)
         ])
+    }
+    
+    private func setupButtonTargets() {
+        callEmployeeButton.addTarget(self, action: #selector(handleCallEmployeeButton), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
+        paymentButton.addTarget(self, action: #selector(handlePaymentButton), for: .touchUpInside)
     }
     
     private func createOrderPriceInfo() -> UIStackView {
@@ -185,23 +153,75 @@ extension OrderListView {
         
         return orderListTable
     }
-}
+    
+    // MARK: - Action Helpers
+    
+    @objc private func handleCallEmployeeButton() {
+        delegate?.didTapCallEmployeeButton()
+    }
 
-extension OrderListView: UITableViewDataSource, UITableViewDelegate {
-    func setTotalOrderInfo() {
-        let orderListCount = orderList.count
-        var totalPrice: Double = 0
-        var totalCount: Int = 0
-        
-        for i in 0 ..< orderListCount {
-            totalPrice += orderList[i].menuItem.price * Double(orderList[i].orderCount)
-            totalCount += orderList[i].orderCount
-        }
-        
-        countLabel.text = "\(totalCount) 개"
-        priceLabel.text = "\(totalPrice.formattedString())원"
+    @objc private func handleCancelButton() {
+        delegate?.didTapCancelButton()
+    }
+
+    @objc private func handlePaymentButton() {
+        delegate?.didTapPaymentButton()
     }
     
+    // MARK: - Data Setting
+    
+    private func setOrderItem(_ item: SpabucksMenuItem) {
+        var duplicateCheck = false
+        var duplicateIndex: Int?
+        
+        for i in 0 ..< orderList.count {
+            if(orderList[i].menuItem.name == item.name) {
+                duplicateIndex = orderList.indices.filter({"\(orderList[$0].menuItem.name)-\(orderList[$0].menuItem.id)" == "\(orderList[i].menuItem.name)-\(orderList[i].menuItem.id)"}).first
+                duplicateCheck = true
+                
+                break
+            }
+        }
+
+        if duplicateCheck == true {
+            orderList[duplicateIndex!].orderCount += 1
+            orderListTable.reloadRows(at: [IndexPath(row: duplicateIndex!, section: 0)], with: .automatic)
+            
+            setTotalOrderInfo()
+        } else {
+            let orderItemData = SpabucksOrderItem(menuItem: item)
+            orderList.append(orderItemData)
+            
+            updateOrderListTable()
+        }
+    }
+    
+    private func updateOrderListTable() {
+        let indexPath = IndexPath(row: self.orderList.count-1, section: 0)
+        orderListTable.insertRows(at: [indexPath], with: .automatic)
+        
+        setTotalOrderInfo()
+    }
+    
+    func orderListRemoveAll() {
+        orderList.removeAll()
+        orderListTable.reloadData()
+        
+        setTotalOrderInfo()
+    }
+}
+
+// MARK: - MenuDataDelegate
+
+extension OrderListView: MenuDataDelegate {
+    func didSelectMenuItem(_ item: SpabucksMenuItem) {
+        setOrderItem(item)
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension OrderListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orderList.count
     }
@@ -222,12 +242,28 @@ extension OrderListView: UITableViewDataSource, UITableViewDelegate {
             self?.deleteOrder(at: indexPath)
         }
         
-        cell.itemImageView.image = UIImage(named: orderList[indexPath.row].menuItem.imageName)
-        cell.itemNameLabel.text = orderList[indexPath.row].menuItem.name
-        cell.itemPriceLabel.text = "\((self.orderList[indexPath.row].menuItem.price * Double(self.orderList[indexPath.row].orderCount)).formattedString()) 원"
-        cell.quantityLabel.text = String(self.orderList[indexPath.row].orderCount)
+        let orderItem = orderList[indexPath.row]
+        cell.configure(with: orderItem)
         
         return cell
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension OrderListView: UITableViewDataSource {
+    func setTotalOrderInfo() {
+        let orderListCount = orderList.count
+        var totalPrice: Double = 0
+        var totalCount: Int = 0
+        
+        for i in 0 ..< orderListCount {
+            totalPrice += orderList[i].menuItem.price * Double(orderList[i].orderCount)
+            totalCount += orderList[i].orderCount
+        }
+        
+        countLabel.text = "\(totalCount) 개"
+        priceLabel.text = "\(totalPrice.formattedString())원"
     }
     
     private func updateOrderCount(at indexPath: IndexPath, delta: Int) {

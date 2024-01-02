@@ -6,13 +6,13 @@
 //
 import UIKit
 
-class MenuView: UIView {
+// MARK: - MenuView
+
+final class MenuView: UIView {
     
     weak var delegate: MenuDataDelegate?
     
     // MARK: - Properties
-    
-    private let orderView =  OrderListView()
     
     var dataSource: [SpabucksMenuItem] = []
     var drinkItems: [SpabucksMenuItem] = [
@@ -35,7 +35,20 @@ class MenuView: UIView {
     
     // MARK: - UI Properties
     
-    private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.collectionViewCellIdentifier)
+        collectionView.backgroundColor = .white
+        
+        return collectionView
+    }()
+    
+    private let orderView = OrderListView()
     
     // MARK: - Life Cycle
     
@@ -43,6 +56,7 @@ class MenuView: UIView {
         super.init(frame: frame)
         
         setUI()
+        setLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -57,6 +71,7 @@ extension MenuView {
         dataSource = drinkItems
         collectionView.reloadData()
     }
+    
     func showFoodMenuView() {
         dataSource = foodItems
         collectionView.reloadData()
@@ -91,9 +106,9 @@ extension MenuView: UICollectionViewDataSource {
             
             return UICollectionViewCell()
         }
-        cell.imageView.image = UIImage(named: dataSource[indexPath.row].imageName)
-        cell.nameLabel.text = dataSource[indexPath.row].name
-        cell.priceLabel.text = String("\(Int(dataSource[indexPath.row].price)) 원")
+        
+        let menuItem = dataSource[indexPath.row]
+        cell.configure(with: menuItem)
         
         return cell
     }
@@ -110,17 +125,12 @@ extension MenuView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         return 30
-        
     }
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    //        return 30
-    //    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
@@ -136,14 +146,10 @@ extension MenuView: UICollectionViewDelegateFlowLayout {
 extension MenuView {
     private func setUI() {
         heightAnchor.constraint(equalToConstant: 455).isActive = true
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.collectionViewCellIdentifier)
-        collectionView.backgroundColor = .white
+    }
+    
+    private func setLayout() {
         addSubview(collectionView)
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),

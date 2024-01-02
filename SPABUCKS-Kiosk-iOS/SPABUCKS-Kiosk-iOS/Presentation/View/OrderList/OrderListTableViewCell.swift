@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderListTableViewCell: UITableViewCell {
+final class OrderListTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
@@ -19,23 +19,23 @@ class OrderListTableViewCell: UITableViewCell {
     
     // MARK: - UI Properties
     
-    let itemImageView: UIImageView = {
+    private let itemImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
     
-    let itemNameLabel = UILabel()
+    private let itemNameLabel = UILabel()
     
-    let itemPriceLabel: UILabel = {
+    private let itemPriceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
         
         return label
     }()
     
-    let quantityLabel = UILabel()
+    private let quantityLabel = UILabel()
     
     private let minusButton: ColorButton = {
         let button = ColorButton(title: "-", color: UIColor.systemGray5)
@@ -60,43 +60,16 @@ class OrderListTableViewCell: UITableViewCell {
     
     // MARK: - Life Cycle
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        itemImageView.image = nil
-        itemNameLabel.text = nil
-        itemPriceLabel.text = nil
-        quantityLabel.text = nil
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setUI()
+        setLayout()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        setUI()
-    }
-    
-    // MARK: Button Action Method
-    
-    @objc private func tapMinusButton() {
-        onMinusButton?()
-    }
-    
-    @objc private func tapPlusButton() {
-        onPlusButton?()
-    }
-    
-    @objc private func tapDeleteButton() {
-        onDeleteButton?()
     }
 }
 
@@ -117,8 +90,12 @@ extension OrderListTableViewCell {
             contentView.addSubview($0)
         }
         
-        // MARK: Auto Layout
         
+    }
+    
+    // MARK: - Layout Helpers
+    
+    private func setLayout() {
         // itemImageView
         itemImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -175,4 +152,25 @@ extension OrderListTableViewCell {
         ])
     }
     
+    // MARK: - Action Helper
+    
+    // MARK: Button Action
+    @objc private func tapMinusButton() {
+        onMinusButton?()
+    }
+    
+    @objc private func tapPlusButton() {
+        onPlusButton?()
+    }
+    
+    @objc private func tapDeleteButton() {
+        onDeleteButton?()
+    }
+    
+    func configure(with item: SpabucksOrderItem) {
+        itemImageView.image = UIImage(named: item.menuItem.imageName)
+        itemNameLabel.text = item.menuItem.name
+        itemPriceLabel.text = "\((item.menuItem.price * Double(item.orderCount)).formattedString()) 원"
+        quantityLabel.text = String(item.orderCount)
+    }
 }

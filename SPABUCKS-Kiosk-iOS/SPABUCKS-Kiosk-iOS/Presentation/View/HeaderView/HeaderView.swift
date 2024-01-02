@@ -7,11 +7,32 @@
 
 import UIKit
 
-class HeaderView: UIView {
+protocol HeaderViewDelegate: AnyObject {
+    func didTapBeverageButton()
+    func didTapFoodButton()
+    func didTapMDButton()
+}
+
+// MARK: - HeaderView
+
+final class HeaderView: UIView {
+    
+    // MARK: - Properties
+    
+    weak var delegate: HeaderViewDelegate?
     
     // MARK: - UI Properties
     
-    let spabucksNameLabel: UILabel = {
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    private let spabucksNameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .systemPink
         label.text = "SPABUCKS"
@@ -22,52 +43,18 @@ class HeaderView: UIView {
         return label
     }()
     
-    let beverageMenuButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("음료", for: .normal)
-        button.frame.size.width = 100
-        button.frame.size.height = 50
-        button.layer.cornerRadius = 20
-        button.setTitleColor(.black, for: .normal)
-        button.layer.shadowColor = UIColor.lightGray.cgColor
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowOffset = CGSize.zero
-        
-        return button
-    }()
+    private lazy var beverageMenuButton: UIButton = { createTabButton(with: "음료")}()
     
-    let foodMenuButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("푸드", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.frame.size.width = 100
-        button.frame.size.height = 50
-        button.layer.cornerRadius = 20
-        button.layer.shadowColor = UIColor.lightGray.cgColor
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowOffset = CGSize.zero
-        
-        return button
-    }()
+    private lazy var foodMenuButton: UIButton = { createTabButton(with: "푸드")}()
     
-    let mdMenuButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("상품", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.frame.size.width = 100
-        button.frame.size.height = 50
-        button.layer.cornerRadius = 20
-        button.layer.shadowColor = UIColor.lightGray.cgColor
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowOffset = CGSize.zero
-        
-        return button
-    }()
+    private lazy var mdMenuButton: UIButton = { createTabButton(with: "상품")}()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setUI()
+        setLayout()
+        setupButtonTargets()
     }
     
     required init?(coder: NSCoder) {
@@ -83,25 +70,24 @@ extension HeaderView {
         self.backgroundColor = .systemPink
         heightAnchor.constraint(equalToConstant: 65 + 50).isActive = true
         
-        let stackView: UIStackView = {
-            let stackView = UIStackView()
-            stackView.axis = .vertical
-            stackView.distribution = .fillEqually
-            
-            return stackView
-        }()
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(stackView)
         stackView.addArrangedSubview(spabucksNameLabel)
         stackView.addArrangedSubview(makeCategory())
-        
+    }
+    
+    private func setLayout() {
+        self.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+    }
+    
+    private func setupButtonTargets() {
+        beverageMenuButton.addTarget(self, action: #selector(didTapBeverageButton), for: .touchUpInside)
+        foodMenuButton.addTarget(self, action: #selector(didTapFoodButton), for: .touchUpInside)
+        mdMenuButton.addTarget(self, action: #selector(didTapMdButton), for: .touchUpInside)
     }
     
     private func makeCategory() -> UIStackView {
@@ -127,4 +113,52 @@ extension HeaderView {
         return stackView
     }
     
+    private func createTabButton(with title: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.frame.size.width = 100
+        button.frame.size.height = 50
+        button.layer.cornerRadius = 20
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize.zero
+        
+        return button
+    }
+    
+    // MARK: - Action Helpers
+    
+    @objc func didTapBeverageButton() {
+        delegate?.didTapBeverageButton()
+        
+    }
+    
+    @objc func didTapFoodButton() {
+        delegate?.didTapFoodButton()
+        
+    }
+    
+    @objc func didTapMdButton() {
+        delegate?.didTapMDButton()
+        
+    }
+    
+    func highlightBeverageButton() {
+        mdMenuButton.backgroundColor = .clear
+        foodMenuButton.backgroundColor = .clear
+        beverageMenuButton.backgroundColor = .white
+    }
+    
+    func highlightFoodButton() {
+        mdMenuButton.backgroundColor = .clear
+        beverageMenuButton.backgroundColor = .clear
+        foodMenuButton.backgroundColor = .white
+    }
+    
+    func highlightMdButton() {
+        beverageMenuButton.backgroundColor = .clear
+        foodMenuButton.backgroundColor = .clear
+        mdMenuButton.backgroundColor = .white
+    }
 }

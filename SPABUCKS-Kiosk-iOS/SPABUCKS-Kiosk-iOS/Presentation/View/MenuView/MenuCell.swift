@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MenuCell: UICollectionViewCell {
+final class MenuCell: UICollectionViewCell {
     
     // MARK: - Properties
     
@@ -15,9 +15,9 @@ class MenuCell: UICollectionViewCell {
     
     // MARK: - UI Properties
     
-    let imageView = UIImageView()
-    let nameLabel = UILabel()
-    let priceLabel = UILabel()
+    private let imageView = UIImageView()
+    private let nameLabel = UILabel()
+    private let priceLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,7 +28,11 @@ class MenuCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+// MARK: - Extensions
+
+extension MenuCell {
     private func viewCell() {
         backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
@@ -60,6 +64,14 @@ class MenuCell: UICollectionViewCell {
             priceLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5),
             priceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         ])
+    }
+    
+    // MARK: - Action Helpers
+    
+    func configure(with item: SpabucksMenuItem) {
+        imageView.image = UIImage(named: item.imageName)
+        nameLabel.text = item.name
+        priceLabel.text = String("\(Int(item.price)) 원")
     }
 }
 
