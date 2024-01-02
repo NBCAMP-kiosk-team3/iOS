@@ -8,8 +8,20 @@
 
 ![스크린샷 2024-01-01 오후 5 02 08](https://github.com/NBCAMP-kiosk-team3/iOS/assets/107637741/5fffd30a-4f4e-4c1a-b2ed-5a29ad1c196c)
 
+## 🖋️ 프로젝트 결과물 문서
+
+[문서 보러가기](https://melted-recess-194.notion.site/3-iOS-2-b733ce4c5b044ad1a424c93563621e5e)
 
 <br/>
+
+## 📋 프로젝트 발표회 자료
+
+[발표용 ppt](https://melted-recess-194.notion.site/3-iOS-2-b733ce4c5b044ad1a424c93563621e5e)  (비밀번호 : team3)
+  
+[발표 피드백](https://melted-recess-194.notion.site/afa2e96fb45041608b4e01058e53dd15)
+
+<br/>
+
 
 ## 🙋‍♀️ 팀원
 
