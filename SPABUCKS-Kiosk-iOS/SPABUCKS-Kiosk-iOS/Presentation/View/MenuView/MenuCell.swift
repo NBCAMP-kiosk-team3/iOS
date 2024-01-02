@@ -66,6 +66,8 @@ extension MenuCell {
         ])
     }
     
+    // MARK: - Action Helpers
+    
     func configure(with item: SpabucksMenuItem) {
         imageView.image = UIImage(named: item.imageName)
         nameLabel.text = item.name

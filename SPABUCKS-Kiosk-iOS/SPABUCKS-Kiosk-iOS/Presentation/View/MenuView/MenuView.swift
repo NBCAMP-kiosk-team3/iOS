@@ -35,7 +35,18 @@ final class MenuView: UIView {
     
     // MARK: - UI Properties
     
-    private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.collectionViewCellIdentifier)
+        collectionView.backgroundColor = .white
+        
+        return collectionView
+    }()
     
     private let orderView = OrderListView()
     
@@ -45,6 +56,7 @@ final class MenuView: UIView {
         super.init(frame: frame)
         
         setUI()
+        setLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -121,9 +133,6 @@ extension MenuView: UICollectionViewDelegateFlowLayout {
         return 30
         
     }
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    //        return 30
-    //    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
@@ -139,14 +148,10 @@ extension MenuView: UICollectionViewDelegateFlowLayout {
 extension MenuView {
     private func setUI() {
         heightAnchor.constraint(equalToConstant: 455).isActive = true
-        
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: MenuCell.collectionViewCellIdentifier)
-        collectionView.backgroundColor = .white
+    }
+    
+    private func setLayout() {
         addSubview(collectionView)
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: self.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
